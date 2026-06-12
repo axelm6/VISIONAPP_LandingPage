@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision — Tax-smart money for households</title>
+<meta name="description" content="One app for your net worth, budget, and investments. See the tax impact of every move before you make it. Built for households who think long-term.">
+<link rel="icon" type="image/png" href="assets/vision-icon-v2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════════════════════
+     VISION DESIGN SYSTEM · v3
+     Brand: Vision Blue #5C7CFA (periwinkle)
+     Positive/gains: Teal #14B8A6
+     ═══════════════════════════════════════════════════════════ */
+
+  :root[data-theme="dark"]{
+    /* Surfaces */
+    --bg:#0A0E1F;
+    --bg-elevated:#0C1124;
+    --surface:#151B30;
+    --surface-2:#1B2236;
+    --surface-3:#232B45;
+
+    /* Borders */
+    --border:#232B45;
+    --border-strong:#2E3854;
+    --border-faint:rgba(35,43,69,0.5);
+
+    /* Brand */
+    --primary:#5C7CFA;
+    --primary-hover:#6E8BFF;
+    --primary-soft:#171E3B;
+    --primary-glow:rgba(92,124,250,0.45);
+    --ring:rgba(92,124,250,0.45);
+
+    /* Text */
+    --text:#F5F7FF;
+    --text-secondary:#B5BDD0;
+    --text-muted:#8B93A9;
+    --text-faint:#5C6479;
+
+    /* Semantic — shared */
+    --positive:#14B8A6;
+    --positive-soft:rgba(20,184,166,0.12);
+    --up:#22C55E;
+    --negative:#EF4444;
+    --negative-soft:rgba(239,68,68,0.12);
+    --warning:#F59E0B;
+    --warning-soft:rgba(245,158,11,0.12);
+    --info:#5C7CFA;
+
+    /* Logo treatment for dark theme — converts dark navy to white */
+    --logo-filter:brightness(0) invert(1);
+
+    /* Type */
+    --font-sans:'Geist','Helvetica Neue',Arial,sans-serif;
+    --font-mono:'JetBrains Mono',ui-monospace,monospace;
+
+    /* Layout */
+    --gutter:32px;
+    --section:120px;
+    --maxw:1280px;
+
+    color-scheme:dark;
+  }
+
+  /* Light theme — ready for dev team to wire toggle */
+  :root[data-theme="light"]{
+    --bg:#F6F7FB;
+    --bg-elevated:#FFFFFF;
+    --surface:#FFFFFF;
+    --surface-2:#EFF2F8;
+    --surface-3:#E7EBF4;
+    --border:#E3E7F0;
+    --border-strong:#CDD4E4;
+    --border-faint:rgba(227,231,240,0.6);
+    --primary:#4A63E6;
+    --primary-hover:#3C4FC0;
+    --primary-soft:#EEF1FE;
+    --primary-glow:rgba(74,99,230,0.25);
+    --ring:rgba(74,99,230,0.35);
+    --text:#14182A;
+    --text-secondary:#4C5573;
+    --text-muted:#828BA6;
+    --text-faint:#A8AFC4;
+    --logo-filter:none; /* use original dark navy logo */
+    color-scheme:light;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--text);
+    font-family:var(--font-sans);font-weight:400;font-size:16px;line-height:1.55;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(1100px 600px at 82% -8%, rgba(92,124,250,0.12), transparent 60%),
+      radial-gradient(900px 500px at 8% 5%, rgba(92,124,250,0.07), transparent 60%);
+    background-attachment:fixed;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+    opacity:0.3;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 0.05 0 0 0 0 0.08 0 0 0 0 0.12 0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  }
+
+  .container{max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);position:relative;z-index:2}
+  img{max-width:100%;display:block}
+  button,a{font-family:inherit}
+  a{color:inherit;text-decoration:none}
+
+  /* ─── OFFICIAL LOGO IMG (auto-themed via filter) ─── */
+  .v-logo-full{height:32px;width:auto;filter:var(--logo-filter)}
+  .v-logo-icon{height:32px;width:32px;filter:var(--logo-filter)}
+
+  /* ═══════════════ NAVIGATION ═══════════════ */
+  .nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,14,31,0.78);
+    backdrop-filter:blur(24px) saturate(160%);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    max-width:var(--maxw);margin:0 auto;padding:16px var(--gutter);
+  }
+  .nav-brand{display:flex;align-items:center}
+  .nav-brand .v-logo-full{height:28px}
+  .nav-links{display:flex;gap:36px;align-items:center}
+  .nav-links a{font-size:14px;color:var(--text-muted);font-weight:500;transition:color 0.2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{display:flex;gap:10px;align-items:center}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:11px 20px;font-size:14px;font-weight:600;
+    border:1px solid transparent;cursor:pointer;
+    transition:all 0.2s;font-family:inherit;
+    text-decoration:none;border-radius:10px;
+  }
+  .btn-ghost{background:transparent;color:var(--text-secondary);border-color:var(--border-strong)}
+  .btn-ghost:hover{color:var(--text);border-color:var(--text-muted);background:var(--surface)}
+  .btn-primary{
+    background:var(--primary);color:#FFFFFF;border-color:var(--primary);font-weight:700;
+    box-shadow:0 4px 14px -4px var(--primary-glow);
+  }
+  .btn-primary:hover{
+    background:var(--primary-hover);border-color:var(--primary-hover);
+    box-shadow:0 10px 28px -8px var(--primary-glow);transform:translateY(-1px);
+  }
+  .btn-secondary{background:transparent;color:var(--text);border-color:var(--border-strong)}
+  .btn-secondary:hover{background:var(--surface);border-color:var(--text-muted)}
+  .btn-lg{padding:15px 28px;font-size:15px}
+  .btn .arrow{transition:transform 0.2s}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  /* ═══════════════ HERO ═══════════════ */
+  .hero{padding:88px 0 56px;position:relative;overflow:hidden}
+  .hero-inner{display:grid;grid-template-columns:1.05fr 0.95fr;gap:48px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:12px;
+    font-family:var(--font-mono);font-size:11px;font-weight:500;
+    color:var(--primary);text-transform:uppercase;letter-spacing:0.18em;
+    margin-bottom:32px;
+  }
+  .eyebrow::before{content:'';width:28px;height:1px;background:var(--primary)}
+
+  h1.hero-title{
+    font-family:var(--font-sans);font-weight:700;
+    font-size:clamp(42px,5.6vw,78px);line-height:1.0;letter-spacing:-0.035em;
+    margin-bottom:28px;
+  }
+  h1.hero-title em{font-style:normal;font-weight:700;color:var(--primary-hover)}
+  .hero-lede{font-size:18px;line-height:1.55;color:var(--text-secondary);max-width:520px;margin-bottom:36px}
+  .hero-lede em{font-style:normal;color:var(--text);font-weight:500}
+  .hero-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+  .hero-trust{
+    display:flex;gap:22px;flex-wrap:wrap;
+    font-family:var(--font-mono);font-size:11px;color:var(--text-muted);
+    text-transform:uppercase;letter-spacing:0.14em;
+    padding-top:28px;border-top:1px solid var(--border);
+  }
+  .hero-trust span{display:flex;align-items:center;gap:8px}
+  .hero-trust span::before{
+    content:'';width:6px;height:6px;background:var(--primary);
+    box-shadow:0 0 8px var(--primary-glow);border-radius:50%;
+  }
+
+  /* Hero visual — phone stack + floating callouts + orbit */
+  .hero-visual{position:relative;height:720px;display:grid;place-items:center}
+  .orbit-bg{position:absolute;inset:-8%;display:grid;place-items:center;pointer-events:none;opacity:0.55}
+  .orbit-bg svg{width:108%;height:108%;animation:spin 90s linear infinite}
+  @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+  .phone{
+    position:absolute;width:280px;
+    border-radius:36px;overflow:hidden;
+    border:1px solid var(--border-strong);
+    box-shadow:
+      0 40px 100px -25px rgba(0,0,0,0.8),
+      0 0 0 1px rgba(255,255,255,0.04),
+      inset 0 0 0 5px #000;
+    background:#000;
+    transition:transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  }
+  .phone img{width:100%;display:block}
+  .phone-1{transform:translate(-130px,-12px) rotate(-7deg) scale(0.9);z-index:1}
+  .phone-2{transform:translate(20px,32px) rotate(3deg);z-index:3}
+  .phone-3{transform:translate(160px,-22px) rotate(7deg) scale(0.88);z-index:2}
+  .hero-visual:hover .phone-1{transform:translate(-150px,-22px) rotate(-8deg) scale(0.9)}
+  .hero-visual:hover .phone-3{transform:translate(180px,-32px) rotate(8deg) scale(0.88)}
+
+  /* Floating data callouts that "pull out" of the phones */
+  .callout{
+    position:absolute;z-index:5;
+    background:rgba(21,27,48,0.92);backdrop-filter:blur(16px);
+    border:1px solid var(--border-strong);
+    padding:14px 18px;border-radius:14px;
+    box-shadow:0 20px 50px -15px rgba(0,0,0,0.7);
+    font-family:var(--font-mono);font-size:11px;color:var(--text-muted);
+    text-transform:uppercase;letter-spacing:0.14em;
+    animation:floaty 6s ease-in-out infinite;
+  }
+  .callout strong{
+    display:block;font-family:var(--font-sans);font-weight:700;
+    font-size:20px;color:var(--text);text-transform:none;letter-spacing:-0.01em;
+    margin-top:4px;
+  }
+  .callout.positive strong{color:var(--positive)}
+  .callout.primary strong{color:var(--primary-hover)}
+  .callout-1{top:8%;left:-2%;animation-delay:-1s}
+  .callout-2{bottom:14%;right:-2%;animation-delay:-3s}
+  .callout-3{top:38%;right:-8%;animation-delay:-5s}
+  @keyframes floaty{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+  }
+
+  /* ═══════════════ TRUST STRIP ═══════════════ */
+  .trust-strip{
+    padding:32px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+    background:rgba(21,27,48,0.4);
+  }
+  .trust-inner{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:40px;align-items:center;
+    max-width:var(--maxw);margin:0 auto;padding:0 var(--gutter);
+  }
+  .trust-item{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;text-align:center;line-height:1.5}
+  .trust-item strong{display:block;color:var(--text);font-size:15px;font-family:var(--font-sans);font-weight:600;letter-spacing:-0.01em;text-transform:none;margin-bottom:4px}
+
+  /* ═══════════════ "BY THE NUMBERS" STRIP (NEW) ═══════════════ */
+  .numbers{
+    padding:80px 0;background:var(--bg-elevated);
+    border-bottom:1px solid var(--border);position:relative;
+  }
+  .numbers-head{display:grid;grid-template-columns:auto 1fr;gap:32px;margin-bottom:48px;align-items:end}
+  .numbers-eyebrow{font-family:var(--font-mono);font-size:11px;color:var(--primary);text-transform:uppercase;letter-spacing:0.2em;border-top:1px solid var(--border-strong);padding-top:14px;min-width:160px;font-weight:500}
+  .numbers-title{font-family:var(--font-sans);font-weight:700;font-size:clamp(28px,3.5vw,44px);letter-spacing:-0.025em;line-height:1.1}
+  .numbers-title em{font-style:normal;color:var(--primary-hover)}
+  .numbers-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--border);background:var(--surface);border-radius:16px;overflow:hidden}
+  .num-cell{
+    padding:32px 28px;border-right:1px solid var(--border);
+    display:flex;flex-direction:column;gap:8px;
+    transition:background 0.2s;
+  }
+  .num-cell:hover{background:var(--surface-2)}
+  .num-cell:last-child{border-right:none}
+  .num-label{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.18em;font-weight:500}
+  .num-value{font-family:var(--font-sans);font-weight:700;font-size:36px;letter-spacing:-0.025em;line-height:1;color:var(--text)}
+  .num-value .accent{color:var(--positive)}
+  .num-value .accent-blue{color:var(--primary-hover)}
+  .num-value .accent-red{color:var(--negative)}
+  .num-detail{font-size:13px;color:var(--text-muted);margin-top:6px;line-height:1.5}
+
+  /* ═══════════════ SECTIONS ═══════════════ */
+  section{padding:var(--section) 0;position:relative}
+  .section-head{display:grid;grid-template-columns:auto 1fr;gap:48px;margin-bottom:72px;align-items:end}
+  .section-num{
+    font-family:var(--font-mono);font-size:11px;color:var(--text-muted);
+    text-transform:uppercase;letter-spacing:0.2em;
+    border-top:1px solid var(--border-strong);padding-top:14px;min-width:160px;
+  }
+  .section-num strong{color:var(--primary);font-weight:500}
+  h2.section-title{font-family:var(--font-sans);font-weight:700;font-size:clamp(34px,4.8vw,60px);line-height:1.02;letter-spacing:-0.03em}
+  h2.section-title em{font-style:normal;color:var(--primary-hover);font-weight:700}
+  .section-sub{font-size:18px;color:var(--text-secondary);max-width:680px;margin-top:22px;font-weight:400;line-height:1.55}
+  .section-sub em{font-style:normal;color:var(--text);font-weight:500}
+
+  /* ═══════════════ THE WEDGE (Sell Simulator) ═══════════════ */
+  .wedge{background:linear-gradient(180deg, transparent, var(--bg-elevated) 30%, var(--bg-elevated) 70%, transparent);position:relative}
+  .wedge::before,.wedge::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:calc(100% - 64px);height:1px;background:var(--border-strong)}
+  .wedge::before{top:0}.wedge::after{bottom:0}
+  .wedge-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+  .premium-tag{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--font-mono);font-size:11px;font-weight:600;
+    color:var(--primary);background:var(--primary-soft);
+    padding:6px 12px;text-transform:uppercase;letter-spacing:0.16em;
+    margin-bottom:24px;border-radius:6px;border:1px solid rgba(92,124,250,0.25);
+  }
+  .premium-tag::before{content:'';width:6px;height:6px;background:var(--primary);box-shadow:0 0 8px var(--primary-glow);border-radius:50%}
+  .wedge-copy h3{font-family:var(--font-sans);font-weight:700;font-size:clamp(32px,3.6vw,46px);line-height:1.08;letter-spacing:-0.025em;margin-bottom:22px}
+  .wedge-copy h3 em{font-style:normal;color:var(--primary-hover);font-weight:700}
+  .wedge-copy p{color:var(--text-secondary);font-size:16px;line-height:1.65;margin-bottom:16px;max-width:520px}
+  .wedge-bullets{margin-top:32px;display:flex;flex-direction:column;gap:14px}
+  .wedge-bullet{display:grid;grid-template-columns:24px 1fr;gap:14px;align-items:start;padding:14px 0;border-bottom:1px solid var(--border)}
+  .wedge-bullet:last-child{border-bottom:none}
+  .wedge-bullet .check{
+    width:20px;height:20px;border:1.5px solid var(--primary);border-radius:50%;
+    display:grid;place-items:center;color:var(--primary);font-size:11px;font-weight:700;margin-top:2px;
+  }
+  .wedge-bullet div{font-size:15px;color:var(--text);font-weight:500}
+  .wedge-bullet div small{display:block;color:var(--text-muted);font-size:13px;margin-top:4px;font-weight:400;line-height:1.5}
+
+  /* Sell Simulator mockup — matches app visual language */
+  .sell-mock{
+    background:var(--surface);border:1px solid var(--border-strong);
+    padding:28px;position:relative;overflow:hidden;border-radius:20px;
+    box-shadow:0 30px 80px -30px rgba(0,0,0,0.7);
+  }
+  .sell-mock::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, var(--primary), transparent)}
+  .sell-mock-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--border);margin-bottom:20px}
+  .sell-mock-head .tag{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;font-weight:500}
+  .sell-mock-head .ticker{font-family:var(--font-mono);font-size:13px;color:var(--text);font-weight:600}
+
+  /* Big number block — app-style */
+  .sell-amt-block{
+    background:var(--surface-2);border:1px solid var(--border);border-radius:14px;
+    padding:20px;margin-bottom:14px;
+  }
+  .sell-amt-label{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;font-weight:500;margin-bottom:8px}
+  .sell-amt{font-family:var(--font-sans);font-weight:700;font-size:38px;letter-spacing:-0.025em;line-height:1;color:var(--text)}
+  .sell-amt-meta{display:flex;align-items:center;gap:10px;margin-top:10px}
+  .sell-pill{
+    font-family:var(--font-sans);font-size:13px;font-weight:600;
+    padding:3px 10px;border-radius:8px;
+    background:var(--positive-soft);color:var(--positive);
+  }
+  .sell-amt-meta small{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.14em}
+
+  .sell-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+  .sell-card{padding:18px;background:var(--surface-2);border:1px solid var(--border);border-radius:14px}
+  .sell-card.bad{border-color:rgba(239,68,68,0.3)}
+  .sell-card.good{border-color:rgba(20,184,166,0.35);background:rgba(20,184,166,0.05)}
+  .sell-card-label{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:10px;font-weight:500}
+  .sell-card-amt{font-family:var(--font-sans);font-size:24px;font-weight:700;letter-spacing:-0.015em}
+  .sell-card-amt.red{color:var(--negative)}
+  .sell-card-amt.teal{color:var(--positive)}
+  .sell-card-detail{font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.5}
+
+  .sell-takeaway{
+    padding:16px;background:rgba(20,184,166,0.06);
+    border:1px solid rgba(20,184,166,0.25);border-radius:12px;
+    font-size:14px;color:var(--text);line-height:1.5;
+    display:flex;align-items:center;gap:12px;
+  }
+  .sell-takeaway::before{
+    content:'⊕';color:var(--positive);font-size:20px;line-height:1;
+  }
+  .sell-takeaway strong{color:var(--positive);font-weight:700}
+
+  /* ═══════════════ FEATURES GRID ═══════════════ */
+  .features-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden;
+  }
+  .feature{
+    background:var(--bg);padding:36px 28px;
+    display:flex;flex-direction:column;gap:18px;min-height:320px;
+    transition:background 0.25s;position:relative;
+  }
+  .feature:hover{background:var(--surface)}
+  .feature-icon{
+    width:44px;height:44px;border:1px solid var(--border-strong);border-radius:11px;
+    display:grid;place-items:center;color:var(--primary);
+    font-family:var(--font-mono);font-weight:600;font-size:13px;
+    transition:border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  }
+  .feature:hover .feature-icon{
+    border-color:var(--primary);background:var(--primary-soft);
+    box-shadow:0 0 0 4px rgba(92,124,250,0.08);
+  }
+  .feature-tag{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;font-weight:500}
+  .feature-tag.premium{color:var(--primary)}
+  .feature h3{font-family:var(--font-sans);font-weight:600;font-size:22px;letter-spacing:-0.02em;line-height:1.2}
+  .feature p{color:var(--text-muted);font-size:14px;line-height:1.6;flex:1}
+  .feature .feature-meta{
+    margin-top:auto;padding-top:18px;border-top:1px dashed var(--border-strong);
+    font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;
+  }
+
+  /* ═══════════════ SHOWCASE ROWS ═══════════════ */
+  .showcase{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:120px}
+  .showcase:last-child{margin-bottom:0}
+  .showcase.reverse{direction:rtl}
+  .showcase.reverse > *{direction:ltr}
+  .showcase-tag{
+    display:inline-block;font-family:var(--font-mono);font-size:10px;
+    color:var(--primary);text-transform:uppercase;letter-spacing:0.18em;
+    margin-bottom:18px;padding:5px 11px;background:var(--primary-soft);
+    border:1px solid rgba(92,124,250,0.2);border-radius:6px;font-weight:600;
+  }
+  .showcase-copy h3{font-family:var(--font-sans);font-weight:700;font-size:clamp(30px,3.2vw,42px);line-height:1.08;letter-spacing:-0.025em;margin-bottom:20px}
+  .showcase-copy h3 em{font-style:normal;color:var(--primary-hover);font-weight:700}
+  .showcase-copy p{color:var(--text-secondary);font-size:16px;line-height:1.65;margin-bottom:14px;max-width:500px}
+  .showcase-points{margin-top:24px;display:flex;flex-direction:column;gap:14px}
+  .showcase-point{display:grid;grid-template-columns:36px 1fr;gap:14px;align-items:start;font-size:15px;line-height:1.5}
+  .showcase-point .num{
+    font-family:var(--font-mono);font-size:10px;color:var(--primary);
+    border:1px solid var(--border-strong);padding:6px 0;text-align:center;
+    letter-spacing:0.08em;font-weight:600;border-radius:6px;background:var(--surface);
+  }
+  .showcase-point strong{color:var(--text);font-weight:600;display:block;margin-bottom:2px}
+  .showcase-point span{color:var(--text-muted);font-size:14px;font-weight:400}
+
+  .showcase-visual{position:relative;display:flex;align-items:center;justify-content:center;min-height:560px}
+  .showcase-phone{
+    position:relative;width:310px;max-width:100%;
+    border-radius:40px;overflow:hidden;
+    border:1px solid var(--border-strong);
+    box-shadow:
+      0 40px 100px -25px rgba(0,0,0,0.75),
+      0 0 0 1px rgba(255,255,255,0.04),
+      inset 0 0 0 5px #000;
+    background:#000;z-index:2;
+  }
+  .showcase-phone img{width:100%;display:block}
+  .showcase-glow{
+    position:absolute;width:520px;height:520px;
+    background:radial-gradient(circle, var(--primary-glow), transparent 60%);
+    opacity:0.4;pointer-events:none;z-index:1;
+  }
+
+  /* ═══════════════ CARD OPTIMIZER FEATURE BLOCK (score gauge visual) ═══════════════ */
+  .optimizer-feature{
+    background:var(--surface);border:1px solid var(--border-strong);
+    border-radius:24px;padding:64px;margin-top:64px;
+    display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;
+    position:relative;overflow:hidden;
+  }
+  .optimizer-feature::before{
+    content:'';position:absolute;top:-50%;right:-20%;width:600px;height:600px;
+    background:radial-gradient(circle, var(--primary-glow), transparent 60%);
+    opacity:0.15;pointer-events:none;
+  }
+  .opt-copy{position:relative;z-index:2}
+  .opt-copy h3{font-family:var(--font-sans);font-weight:700;font-size:clamp(28px,3.2vw,40px);letter-spacing:-0.025em;line-height:1.1;margin-bottom:22px}
+  .opt-copy h3 em{font-style:normal;color:var(--primary-hover)}
+  .opt-copy p{color:var(--text-secondary);font-size:16px;line-height:1.65;margin-bottom:14px}
+  .opt-metrics{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  .opt-metric{padding:16px;background:var(--surface-2);border:1px solid var(--border);border-radius:12px}
+  .opt-metric-label{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:6px;font-weight:500}
+  .opt-metric-val{font-family:var(--font-sans);font-weight:700;font-size:22px;letter-spacing:-0.02em;color:var(--text)}
+  .opt-metric-val.positive{color:var(--positive)}
+  .opt-metric-val.negative{color:var(--negative)}
+
+  /* The Score Gauge visualization */
+  .gauge-wrap{position:relative;display:grid;place-items:center;z-index:2}
+  .gauge{width:340px;height:340px;position:relative}
+  .gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .gauge-bg{stroke:var(--surface-3);fill:none}
+  .gauge-fg{stroke:var(--positive);fill:none;stroke-linecap:round;filter:drop-shadow(0 0 12px rgba(20,184,166,0.6));transition:stroke-dashoffset 2s cubic-bezier(0.22,1,0.36,1)}
+  .gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .gauge-number{font-family:var(--font-sans);font-weight:700;font-size:88px;letter-spacing:-0.04em;line-height:1;color:var(--positive)}
+  .gauge-label{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.22em;margin-top:6px;font-weight:500}
+  .gauge-sub{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.18em;margin-top:18px;text-align:center;font-weight:500}
+  .gauge-sub strong{color:var(--text);font-weight:600}
+
+  /* ═══════════════ HOUSEHOLD ═══════════════ */
+  .household-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .house-card{
+    padding:36px 28px;background:var(--surface);border:1px solid var(--border);
+    border-radius:16px;display:flex;flex-direction:column;gap:18px;min-height:320px;
+    position:relative;overflow:hidden;
+  }
+  .house-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, currentColor, transparent 70%);opacity:0.8}
+  .house-card.mine{color:var(--primary)}
+  .house-card.yours{color:var(--warning)}
+  .house-card.ours{color:var(--positive)}
+  .house-label{font-family:var(--font-mono);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.22em;color:currentColor}
+  .house-card h4{font-family:var(--font-sans);font-weight:700;font-size:36px;letter-spacing:-0.02em;line-height:1.05;color:var(--text)}
+  .house-card p{color:var(--text-muted);font-size:14px;line-height:1.6}
+  .house-card ul{list-style:none;margin-top:auto;padding-top:18px;border-top:1px dashed var(--border-strong);display:flex;flex-direction:column;gap:8px}
+  .house-card li{font-size:13px;color:var(--text-secondary);display:grid;grid-template-columns:14px 1fr;gap:8px}
+  .house-card li::before{content:'';width:5px;height:5px;background:currentColor;border-radius:50%;margin-top:8px}
+
+  /* ═══════════════ PRIVACY ═══════════════ */
+  .privacy{background:linear-gradient(180deg, transparent, var(--bg-elevated) 30%, var(--bg-elevated) 70%, transparent);position:relative}
+  .privacy::before,.privacy::after{content:'';position:absolute;left:50%;transform:translateX(-50%);width:calc(100% - 64px);height:1px;background:var(--border-strong)}
+  .privacy::before{top:0}.privacy::after{bottom:0}
+  .privacy-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:start}
+  .privacy-statement{font-family:var(--font-sans);font-weight:400;font-size:clamp(26px,2.8vw,38px);line-height:1.3;letter-spacing:-0.02em;margin-bottom:28px;color:var(--text)}
+  .privacy-statement em{font-style:normal;color:var(--primary-hover);font-weight:600}
+  .privacy-statement strong{font-weight:600;color:var(--text)}
+  .privacy-detail{font-size:16px;color:var(--text-secondary);line-height:1.65;max-width:520px;margin-bottom:14px}
+  .privacy-facts{display:flex;flex-direction:column}
+  .pf-item{padding:22px 0;border-bottom:1px solid var(--border);display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:start}
+  .pf-item:last-child{border-bottom:none}
+  .pf-num{font-family:var(--font-mono);font-size:11px;color:var(--primary);letter-spacing:0.18em;font-weight:600;padding-top:3px;min-width:36px}
+  .pf-body strong{display:block;font-family:var(--font-sans);font-weight:600;font-size:18px;letter-spacing:-0.015em;margin-bottom:6px;color:var(--text)}
+  .pf-body span{color:var(--text-muted);font-size:14px;line-height:1.6}
+
+  /* ═══════════════ PRICING ═══════════════ */
+  .pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px;align-items:stretch}
+  .price-card{background:var(--surface);border:1px solid var(--border-strong);border-radius:16px;padding:44px 36px;display:flex;flex-direction:column;gap:24px;position:relative;overflow:hidden}
+  .price-card.featured{border-color:rgba(92,124,250,0.5);background:linear-gradient(180deg, rgba(92,124,250,0.06), var(--surface))}
+  .price-card.featured::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--primary)}
+  .price-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+  .price-tier{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.22em;font-weight:600}
+  .price-card.featured .price-tier{color:var(--primary)}
+  .price-badge{font-family:var(--font-mono);font-size:10px;color:var(--primary);background:var(--primary-soft);padding:5px 10px;text-transform:uppercase;letter-spacing:0.16em;border:1px solid rgba(92,124,250,0.3);border-radius:6px;font-weight:600}
+  .price-amount{font-family:var(--font-sans);font-weight:700;font-size:64px;letter-spacing:-0.035em;line-height:1}
+  .price-amount .currency{font-size:28px;color:var(--text-muted);vertical-align:top;margin-right:4px;font-weight:500}
+  .price-amount .period{font-size:18px;color:var(--text-muted);font-weight:400;margin-left:6px}
+  .price-yearly{font-family:var(--font-mono);font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.14em}
+  .price-yearly strong{color:var(--primary);font-weight:600}
+  .price-features{list-style:none;display:flex;flex-direction:column;gap:14px;flex:1;padding-top:10px;border-top:1px solid var(--border)}
+  .price-features li{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:start;font-size:15px;color:var(--text);line-height:1.5}
+  .price-features li::before{
+    content:'';width:18px;height:18px;border:1px solid var(--primary);border-radius:50%;
+    display:grid;place-items:center;margin-top:2px;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235C7CFA' stroke-width='3' stroke-linecap='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/10px no-repeat;
+  }
+  .price-features li small{display:block;color:var(--text-muted);font-size:13px;margin-top:2px;font-weight:400}
+  .price-features li strong{color:var(--primary);font-weight:700}
+  .price-cta{margin-top:8px}
+  .price-cta .btn{width:100%;justify-content:center}
+
+  /* ═══════════════ COMPARISON TABLE ═══════════════ */
+  .compare{margin-top:64px;border:1px solid var(--border);background:var(--surface);overflow-x:auto;border-radius:16px}
+  .compare-table{width:100%;border-collapse:collapse;min-width:720px}
+  .compare-table th,.compare-table td{padding:18px 24px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+  .compare-table thead th{background:var(--surface-2);font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;font-weight:600}
+  .compare-table thead th.us{color:var(--primary)}
+  .compare-table tbody td{color:var(--text-muted)}
+  .compare-table tbody td:first-child{color:var(--text);font-weight:500}
+  .compare-table .check{color:var(--primary);font-size:16px;font-weight:700}
+  .compare-table .cross{color:var(--text-faint);font-size:16px}
+  .compare-table .partial{color:var(--warning);font-size:12px;font-family:var(--font-mono);font-weight:500}
+  .compare-table tbody tr:last-child td{border-bottom:none}
+  .compare-table tbody tr.highlight{background:rgba(92,124,250,0.04)}
+
+  /* ═══════════════ FOUNDER NOTE ═══════════════ */
+  .founder-inner{max-width:780px;margin:0 auto;text-align:center;padding:64px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+  .founder-eyebrow{font-family:var(--font-mono);font-size:11px;color:var(--primary);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:24px;font-weight:600}
+  .founder-quote{font-family:var(--font-sans);font-weight:400;font-size:clamp(22px,2.6vw,30px);line-height:1.5;letter-spacing:-0.015em;color:var(--text);margin-bottom:36px}
+  .founder-quote em{font-style:normal;color:var(--primary-hover);font-weight:600}
+  .founder-sig{font-family:var(--font-sans);font-size:17px;color:var(--text);font-weight:600;letter-spacing:-0.005em}
+  .founder-sig small{display:block;color:var(--text-muted);font-size:12px;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:0.18em;margin-top:6px;font-weight:500}
+
+  /* ═══════════════ FAQ ═══════════════ */
+  .faq-list{display:flex;flex-direction:column;border-top:1px solid var(--border)}
+  .faq-item{border-bottom:1px solid var(--border);padding:0}
+  .faq-q{
+    width:100%;background:transparent;border:none;color:var(--text);
+    padding:24px 0;text-align:left;cursor:pointer;
+    display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:center;
+    font-family:var(--font-sans);font-size:19px;font-weight:600;letter-spacing:-0.015em;
+  }
+  .faq-q:hover{color:var(--primary-hover)}
+  .faq-num{font-family:var(--font-mono);font-size:11px;color:var(--text-muted);letter-spacing:0.16em;font-weight:500}
+  .faq-toggle{
+    width:26px;height:26px;border:1px solid var(--border-strong);border-radius:8px;
+    display:grid;place-items:center;color:var(--primary);
+    transition:transform 0.3s, border-color 0.25s, background 0.25s;
+    font-size:16px;line-height:1;
+  }
+  .faq-q:hover .faq-toggle{border-color:var(--primary);background:var(--primary-soft)}
+  .faq-item.open .faq-toggle{transform:rotate(45deg);border-color:var(--primary);background:var(--primary-soft)}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.22,1,0.36,1)}
+  .faq-item.open .faq-a{max-height:400px}
+  .faq-a-inner{padding:0 0 28px 60px;color:var(--text-secondary);font-size:15px;line-height:1.65;max-width:780px}
+
+  /* ═══════════════ FINAL CTA ═══════════════ */
+  .final-cta{text-align:center;padding:140px 0;position:relative;overflow:hidden}
+  .final-cta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 800px 400px at center, rgba(92,124,250,0.12), transparent 60%);pointer-events:none}
+  .final-orbit{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:640px;height:640px;opacity:0.4;pointer-events:none}
+  .final-orbit svg{width:100%;height:100%;animation:spin 80s linear infinite reverse}
+  .final-cta h2{font-family:var(--font-sans);font-weight:700;font-size:clamp(48px,7.5vw,100px);line-height:1.0;letter-spacing:-0.035em;margin-bottom:28px;position:relative;z-index:2}
+  .final-cta h2 em{font-style:normal;color:var(--primary-hover);font-weight:700}
+  .final-cta p{font-size:19px;color:var(--text-secondary);max-width:560px;margin:0 auto 40px;position:relative;z-index:2;font-weight:400;line-height:1.55}
+  .final-ctas{display:flex;gap:12px;justify-content:center;position:relative;z-index:2;flex-wrap:wrap}
+  .final-note{margin-top:32px;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;position:relative;z-index:2}
+
+  /* ═══════════════ FOOTER ═══════════════ */
+  footer{background:var(--bg-elevated);border-top:1px solid var(--border);padding:64px 0 32px}
+  .foot-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  .foot-brand .v-logo-full{height:28px;margin-bottom:18px}
+  .foot-brand p{color:var(--text-muted);font-size:14px;line-height:1.6;max-width:340px}
+  .foot-col h5{font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.2em;margin-bottom:18px;font-weight:600}
+  .foot-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .foot-col a{color:var(--text-secondary);font-size:14px;transition:color 0.2s}
+  .foot-col a:hover{color:var(--text)}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-mono);font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;gap:24px;flex-wrap:wrap}
+  .foot-disclaimer{margin-top:24px;padding-top:24px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-faint);line-height:1.6;max-width:880px;text-transform:none;letter-spacing:0;font-family:var(--font-sans)}
+
+  /* ═══════════════ ANIMATIONS ═══════════════ */
+  @media (prefers-reduced-motion:no-preference){
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s, transform 0.8s}
+    .reveal.in{opacity:1;transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .callout,.orbit-bg svg,.final-orbit svg{animation:none}
+  }
+
+  /* ═══════════════ RESPONSIVE ═══════════════ */
+  @media (max-width:960px){
+    :root{--gutter:20px;--section:72px}
+    .nav-links{display:none}
+    .nav-cta .btn-ghost{display:none}
+    .hero-inner{grid-template-columns:1fr;gap:64px}
+    .hero-visual{height:520px}
+    .phone{width:220px}
+    .phone-1{transform:translate(-90px,-10px) rotate(-7deg) scale(0.9)}
+    .phone-3{transform:translate(120px,-20px) rotate(7deg) scale(0.88)}
+    .callout{display:none}
+    .trust-inner{grid-template-columns:1fr 1fr;gap:24px}
+    .numbers-grid{grid-template-columns:1fr 1fr}
+    .num-cell{border-right:none;border-bottom:1px solid var(--border)}
+    .num-cell:nth-child(2){border-right:none}
+    .numbers-head{grid-template-columns:1fr;gap:20px}
+    .section-head{grid-template-columns:1fr;gap:24px;margin-bottom:48px}
+    .wedge-inner{grid-template-columns:1fr;gap:48px}
+    .features-grid{grid-template-columns:1fr}
+    .showcase,.showcase.reverse{grid-template-columns:1fr;gap:48px;direction:ltr;margin-bottom:80px}
+    .showcase-visual{min-height:420px}
+    .showcase-phone{width:260px}
+    .optimizer-feature{grid-template-columns:1fr;gap:48px;padding:40px 28px}
+    .gauge{width:280px;height:280px}
+    .gauge-number{font-size:72px}
+    .household-grid{grid-template-columns:1fr}
+    .privacy-inner{grid-template-columns:1fr;gap:48px}
+    .pricing-grid{grid-template-columns:1fr}
+    .foot-top{grid-template-columns:1fr 1fr;gap:32px}
+    .final-cta h2{font-size:48px}
+  }
+  @media (max-width:520px){
+    .trust-inner,.numbers-grid{grid-template-columns:1fr}
+    .num-cell{border-right:none}
+    .foot-top{grid-template-columns:1fr}
+    .foot-bottom{flex-direction:column;align-items:flex-start;gap:12px}
+    .hero-ctas .btn{width:100%;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVIGATION ═══════════════ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-brand" aria-label="Vision Finance — home">
+      <img src="assets/vision-logo-v2.png" alt="Vision Finance" class="v-logo-full">
+    </a>
+    <div class="nav-links">
+      <a href="#features">Features</a>
+      <a href="#card-optimizer">Card Optimizer</a>
+      <a href="#household">Household</a>
+      <a href="#privacy">Privacy</a>
+      <a href="#pricing">Pricing</a>
+    </div>
+    <div class="nav-cta">
+      <a href="#" class="btn btn-ghost">Sign in</a>
+      <a href="#pricing" class="btn btn-primary">Start free <span class="arrow">→</span></a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="eyebrow">Tax-smart money for households</div>
+        <h1 class="hero-title">See all your money. Before you <em>make the move.</em></h1>
+        <p class="hero-lede">
+          One app for your net worth, budget, and investments. Vision shows the <em>tax impact of every sale</em> before you make it — so April never surprises you.
+        </p>
+        <div class="hero-ctas">
+          <a href="#pricing" class="btn btn-primary btn-lg">Start free — no card <span class="arrow">→</span></a>
+          <a href="#features" class="btn btn-secondary btn-lg">See how it works</a>
+        </div>
+        <div class="hero-trust">
+          <span>Connect any bank · Plaid</span>
+          <span>14-day premium trial</span>
+          <span>WCAG 2.1 AA</span>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orbit-bg">
+          <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(300,300)" fill="none">
+              <circle cx="0" cy="0" r="160" stroke="rgba(92,124,250,0.22)" stroke-width="1"/>
+              <ellipse cx="0" cy="0" rx="240" ry="100" stroke="rgba(92,124,250,0.18)" stroke-width="1" transform="rotate(-22)"/>
+              <ellipse cx="0" cy="0" rx="200" ry="200" stroke="rgba(92,124,250,0.1)" stroke-width="1" stroke-dasharray="2 6"/>
+              <circle cx="222" cy="-100" r="6" fill="#5C7CFA"/>
+              <circle cx="-160" cy="0" r="3" fill="#6E8BFF"/>
+              <circle cx="100" cy="-160" r="2" fill="rgba(245,247,255,0.5)"/>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Floating data callouts -->
+        <div class="callout callout-1 positive">
+          YTD GAIN
+          <strong>+$18,272</strong>
+        </div>
+        <div class="callout callout-2 primary">
+          Wallet Score
+          <strong>80 / 100</strong>
+        </div>
+        <div class="callout callout-3 positive">
+          $2,128 left in budget
+          <strong>June 2026</strong>
+        </div>
+
+        <!-- Phone stack -->
+        <div class="phone phone-1"><img src="assets/whatsapp-2.jpeg" alt="Vision Net Worth screen"></div>
+        <div class="phone phone-2"><img src="assets/whatsapp-4.jpeg" alt="Vision Dashboard with $254,200 portfolio"></div>
+        <div class="phone phone-3"><img src="assets/whatsapp-1.jpeg" alt="Vision Budget for June 2026"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════ TRUST STRIP ═══════════════ -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item"><strong>Plaid</strong>Banking + investments</div>
+    <div class="trust-item"><strong>Stripe</strong>Encrypted billing</div>
+    <div class="trust-item"><strong>Sign in with Apple</strong>One-tap, private</div>
+    <div class="trust-item"><strong>AES-256</strong>Tokens at rest</div>
+    <div class="trust-item"><strong>290+ tests</strong>a11y CI on every PR</div>
+  </div>
+</div>
+
+<!-- ═══════════════ "BY THE NUMBERS" STRIP ═══════════════ -->
+<section class="numbers">
+  <div class="container">
+    <div class="numbers-head">
+      <div class="numbers-eyebrow">REAL NUMBERS · LIVE APP</div>
+      <h2 class="numbers-title">What a Vision dashboard <em>actually looks like.</em></h2>
+    </div>
+    <div class="numbers-grid">
+      <div class="num-cell">
+        <div class="num-label">Total net worth</div>
+        <div class="num-value">$569,677</div>
+        <div class="num-detail">Across every linked account — checking, cards, brokerage, mortgage.</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-label">Portfolio · YTD</div>
+        <div class="num-value">+<span class="accent">12.63%</span></div>
+        <div class="num-detail">+$18,272 from January through May, tax-lot-aware.</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-label">Budget left · June</div>
+        <div class="num-value">$2,128</div>
+        <div class="num-detail">Of a $2,600 budget. 18% used at mid-month.</div>
+      </div>
+      <div class="num-cell">
+        <div class="num-label">Wallet score</div>
+        <div class="num-value"><span class="accent">80</span></div>
+        <div class="num-detail">Card Optimizer · $147.26 optimal rewards / 3mo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ THE WEDGE — SELL SIMULATOR ═══════════════ -->
+<section class="wedge" id="sell-simulator">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num"><strong>01</strong> &nbsp;·&nbsp; The wedge</div>
+      <div>
+        <h2 class="section-title">The only money app that shows the <em>tax bill</em> before you sell.</h2>
+        <p class="section-sub">Every other tracker shows you what you've earned. Vision shows you what you'd actually <em>keep</em> — short-term vs long-term, side by side, in two seconds.</p>
+      </div>
+    </div>
+
+    <div class="wedge-inner">
+      <div class="wedge-copy">
+        <span class="premium-tag">Premium feature</span>
+        <h3>Stop guessing in April. <em>See the bill in May.</em></h3>
+        <p>Your brokerage shows you a gain. Vision shows you the gain <em>after taxes</em> — based on your real cost basis, your real holding period, your real bracket.</p>
+        <p>One tap before you sell. One number that tells you whether the trade is actually worth it.</p>
+
+        <div class="wedge-bullets">
+          <div class="wedge-bullet">
+            <div class="check">✓</div>
+            <div>Short-term vs long-term split, side by side<small>The 11 days that turn $1,400 in gains into $1,060 after federal.</small></div>
+          </div>
+          <div class="wedge-bullet">
+            <div class="check">✓</div>
+            <div>Lot-aware — import your real cost basis via CSV<small>Don't trust your broker's average. Use your actual lots.</small></div>
+          </div>
+          <div class="wedge-bullet">
+            <div class="check">✓</div>
+            <div>Plain-English breakdown of every assumption<small>Federal rate, state, NIIT, holding period. Math is shown, not hidden.</small></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sell Simulator mockup — visually matches app cards -->
+      <div class="sell-mock">
+        <div class="sell-mock-head">
+          <div class="tag">SELL SIMULATOR · PREVIEW</div>
+          <div class="ticker">INTC · 120 sh</div>
+        </div>
+
+        <div class="sell-amt-block">
+          <div class="sell-amt-label">Total gain if sold today</div>
+          <div class="sell-amt">$1,494</div>
+          <div class="sell-amt-meta">
+            <span class="sell-pill">+40.08%</span>
+            <small>Holding · 354 days</small>
+          </div>
+        </div>
+
+        <div class="sell-split">
+          <div class="sell-card bad">
+            <div class="sell-card-label">If you sell today</div>
+            <div class="sell-card-amt red">$1,060</div>
+            <div class="sell-card-detail">Short-term · 24% bracket + 3.8% NIIT</div>
+          </div>
+          <div class="sell-card good">
+            <div class="sell-card-label">If you wait 11 days</div>
+            <div class="sell-card-amt teal">$1,270</div>
+            <div class="sell-card-detail">Long-term · 15% cap gains rate</div>
+          </div>
+        </div>
+
+        <div class="sell-takeaway">
+          <div><strong>Save $210</strong> by holding 11 more days. Vision sets the reminder — no math, no guessing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FEATURES GRID ═══════════════ -->
+<section id="features">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num"><strong>02</strong> &nbsp;·&nbsp; Everything in one place</div>
+      <div>
+        <h2 class="section-title">One app. Every account. <em>One clear picture.</em></h2>
+        <p class="section-sub">Vision pulls every bank, card, and brokerage through Plaid — then turns the noise into something you can actually look at over coffee.</p>
+      </div>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">01</div>
+        <div class="feature-tag">FREE · CORE</div>
+        <h3>Live net worth</h3>
+        <p>Every account, every balance, one number — updated automatically. Assets and liabilities side by side, so you know where you actually stand.</p>
+        <div class="feature-meta">Plaid · auto-sync</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">02</div>
+        <div class="feature-tag">FREE · CORE</div>
+        <h3>Monthly budget that carries over</h3>
+        <p>Set categories once. Vision learns your real spending and rolls unspent budget forward, so a slow month doesn't punish you next month.</p>
+        <div class="feature-meta">With Mine / Yours / Ours sharing</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">03</div>
+        <div class="feature-tag">FREE · CORE</div>
+        <h3>Cashflow forecast</h3>
+        <p>"What's left after the bills hit?" Vision learns your recurring income and expenses, then projects the curve through the rest of the month.</p>
+        <div class="feature-meta">7d · 30d · 90d horizon</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">04</div>
+        <div class="feature-tag">FREE · CORE</div>
+        <h3>Smart categorization</h3>
+        <p>Merchants get categorized automatically. Override any rule once and Vision remembers. No tagging every Starbucks for the rest of your life.</p>
+        <div class="feature-meta">Rules apply retroactively</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">05</div>
+        <div class="feature-tag">FREE · CORE</div>
+        <h3>Goal tracking</h3>
+        <p>House down payment. Emergency fund. The wedding. Vision projects when you'll hit each goal at your current pace and nudges if you fall behind.</p>
+        <div class="feature-meta">Progress alerts · weekly check-in</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">06</div>
+        <div class="feature-tag premium">PREMIUM</div>
+        <h3>Sell Simulator</h3>
+        <p>Short-term vs long-term capital-gains preview before you trade. The killer feature — and the only consumer tracker that has it.</p>
+        <div class="feature-meta">Lot-aware · CSV import</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">07</div>
+        <div class="feature-tag premium">PREMIUM</div>
+        <h3>Card Optimizer</h3>
+        <p>Tells you whether to KEEP, EVALUATE, or DROP each card based on how you actually spend — net of annual fees. With the math, not vibes.</p>
+        <div class="feature-meta">Updates monthly</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">08</div>
+        <div class="feature-tag premium">PREMIUM</div>
+        <h3>Monthly recap email</h3>
+        <p>One email on the first of every month. Net worth change. Top movers. Categories that drifted. What's coming next month. Five minutes to read.</p>
+        <div class="feature-meta">No spam · just the recap</div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">09</div>
+        <div class="feature-tag premium">PREMIUM</div>
+        <h3>Full transaction history</h3>
+        <p>Most trackers cap you at 90 days. Premium goes back two years and forward forever. Useful when you need to remember what that $340 in March was.</p>
+        <div class="feature-meta">Searchable · exportable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ SHOWCASE ROWS ═══════════════ -->
+<section>
+  <div class="container">
+
+    <!-- Dashboard -->
+    <div class="showcase">
+      <div class="showcase-copy">
+        <div class="showcase-tag">DASHBOARD · FREE</div>
+        <h3>Your portfolio, <em>at a glance.</em></h3>
+        <p>The first screen of Vision answers the question that takes you fifteen minutes everywhere else: <em>what is my money doing right now?</em></p>
+        <p>Total value. YTD performance. Cost basis. The chart. Top holdings. One screen, no scrolling required.</p>
+        <div class="showcase-points">
+          <div class="showcase-point">
+            <div class="num">01</div>
+            <div><strong>Total value with YTD delta</strong><span>$254,200 · +12.63% · +$18,272 — the headline number with context.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">02</div>
+            <div><strong>Tax-aware cost basis</strong><span>The number every brokerage hides. Vision puts it front-and-center next to gain/loss.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">03</div>
+            <div><strong>Top holdings, sorted by value</strong><span>See what's moving the portfolio. Tap any row for lot-level detail.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="showcase-visual">
+        <div class="showcase-glow"></div>
+        <div class="showcase-phone"><img src="assets/whatsapp-4.jpeg" alt="Vision Dashboard with $254,200 portfolio, up 12.63% YTD"></div>
+      </div>
+    </div>
+
+    <!-- Net Worth -->
+    <div class="showcase reverse">
+      <div class="showcase-visual">
+        <div class="showcase-glow"></div>
+        <div class="showcase-phone"><img src="assets/whatsapp-2.jpeg" alt="Vision Net Worth $569,677 with assets and liabilities breakdown"></div>
+      </div>
+      <div class="showcase-copy">
+        <div class="showcase-tag">NET WORTH · FREE</div>
+        <h3>Net worth, <em>without a spreadsheet.</em></h3>
+        <p>Most people can name their salary. Almost nobody can name their net worth without opening six apps. That's a tooling problem, not an intelligence problem.</p>
+        <p>Vision adds every account through Plaid and shows the total. Updated daily. Free forever.</p>
+        <div class="showcase-points">
+          <div class="showcase-point">
+            <div class="num">01</div>
+            <div><strong>Assets minus liabilities</strong><span>$986,620 in assets. $416,943 in liabilities. The honest number underneath.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">02</div>
+            <div><strong>30-day change tracker</strong><span>+$15,491 · +2.3% — know whether the move came from saving or the market.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">03</div>
+            <div><strong>History as far back as you've connected</strong><span>Watch the curve. Notice the trend before it becomes a problem.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Budget -->
+    <div class="showcase">
+      <div class="showcase-copy">
+        <div class="showcase-tag">BUDGET · FREE</div>
+        <h3>A budget that tells you <em>in time</em> to do something.</h3>
+        <p>Budgets that yell at you in arrears aren't budgets — they're receipts. Vision tracks spend against budget in real time and flags overspend in the month it happens.</p>
+        <div class="showcase-points">
+          <div class="showcase-point">
+            <div class="num">01</div>
+            <div><strong>Spent / Budget / Left, always visible</strong><span>$472 of $2,600 spent · $2,128 left · 18% used — math you can read at a glance.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">02</div>
+            <div><strong>Income reconciled in the same view</strong><span>Paychecks, business income, side income — counted, categorized, ready to budget against.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">03</div>
+            <div><strong>New merchant detection</strong><span>Confirm a new merchant once. Vision learns and tags every future charge from them.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="showcase-visual">
+        <div class="showcase-glow"></div>
+        <div class="showcase-phone"><img src="assets/whatsapp-1.jpeg" alt="Vision Budget for June 2026, $472 spent of $2,600 budget"></div>
+      </div>
+    </div>
+
+    <!-- Top Movers (old screenshot — unique feature) -->
+    <div class="showcase reverse">
+      <div class="showcase-visual">
+        <div class="showcase-glow"></div>
+        <div class="showcase-phone"><img src="assets/IMG_9710.png" alt="Vision Top Movers showing gainers and losers"></div>
+      </div>
+      <div class="showcase-copy">
+        <div class="showcase-tag">INVESTMENTS · FREE</div>
+        <h3>Top movers, <em>tax-aware by default.</em></h3>
+        <p>Every gainer, every loser, ranked by dollar impact on your portfolio — not by ticker order. The narrative of your month in one screen.</p>
+        <div class="showcase-points">
+          <div class="showcase-point">
+            <div class="num">01</div>
+            <div><strong>Gainers and losers, side by side</strong><span>With $ delta and % delta together — context matters as much as the rank.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">02</div>
+            <div><strong>Tax-lot detail per ticker</strong><span>Tap any row for short-term vs long-term breakdown and days until long-term treatment.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">03</div>
+            <div><strong>Cost basis you control</strong><span>Import via CSV. Vision uses your numbers, not your broker's average.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cashflow + recurring -->
+    <div class="showcase">
+      <div class="showcase-copy">
+        <div class="showcase-tag">CASHFLOW · FREE</div>
+        <h3>"What's left <em>after the bills hit?"</em></h3>
+        <p>The question that actually matters — and the one no traditional budget answers. Vision learns your recurring income and expenses from real bank history, then shows the curve through the rest of the month.</p>
+        <div class="showcase-points">
+          <div class="showcase-point">
+            <div class="num">01</div>
+            <div><strong>Actual vs forecast, one chart</strong><span>Solid line for what's happened. Dashed for what's coming. No envelopes, no theater.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">02</div>
+            <div><strong>Recurring transaction verification</strong><span>Vision flags subscriptions and recurring bills for you to confirm. Once confirmed, never asked again.</span></div>
+          </div>
+          <div class="showcase-point">
+            <div class="num">03</div>
+            <div><strong>"Surprise" detection</strong><span>If something is forecast to hit and doesn't — or vice versa — you'll know before the statement.</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="showcase-visual">
+        <div class="showcase-glow"></div>
+        <div class="showcase-phone"><img src="assets/IMG_9715.png" alt="Vision Balance Timeline with recurring transaction verification"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════ CARD OPTIMIZER — DEDICATED FEATURE BLOCK ═══════════════ -->
+<section id="card-optimizer">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num"><strong>03</strong> &nbsp;·&nbsp; Card Optimizer</div>
+      <div>
+        <h2 class="section-title">Your wallet has a score. <em>And we'll fix it.</em></h2>
+        <p class="section-sub">No other consumer money app tells you which cards are paying for themselves — net of annual fees, based on how you actually spend. Vision does. With the math, not the marketing.</p>
+      </div>
+    </div>
+
+    <div class="optimizer-feature">
+      <div class="opt-copy">
+        <span class="premium-tag">Premium feature</span>
+        <h3>An 80 means you're <em>$29.44 off optimal.</em></h3>
+        <p>Vision looks at every dollar you spent in the last three months and figures out the optimal card for each transaction. Then it compares that to the card you actually used.</p>
+        <p>The gap is your score. KEEP the cards that earn their fee. DROP the ones that don't. EVALUATE the ones close to the line.</p>
+
+        <div class="opt-metrics">
+          <div class="opt-metric">
+            <div class="opt-metric-label">3-month spend</div>
+            <div class="opt-metric-val">$3,168</div>
+          </div>
+          <div class="opt-metric">
+            <div class="opt-metric-label">Optimal rewards</div>
+            <div class="opt-metric-val positive">$147.26</div>
+          </div>
+          <div class="opt-metric">
+            <div class="opt-metric-label">Left on the table</div>
+            <div class="opt-metric-val negative">$29.44</div>
+          </div>
+          <div class="opt-metric">
+            <div class="opt-metric-label">Cards tracked</div>
+            <div class="opt-metric-val">All linked</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Animated Score Gauge — recreated from app's Card Optimizer -->
+      <div class="gauge-wrap">
+        <div class="gauge">
+          <svg viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background ring -->
+            <circle class="gauge-bg" cx="160" cy="160" r="130" stroke-width="14"/>
+            <!-- Foreground arc — 80% filled -->
+            <circle class="gauge-fg" id="gaugeArc" cx="160" cy="160" r="130" stroke-width="14"
+                    stroke-dasharray="816.8" stroke-dashoffset="163.36"/>
+          </svg>
+          <div class="gauge-center">
+            <div class="gauge-number">80</div>
+            <div class="gauge-label">SCORE</div>
+          </div>
+        </div>
+        <div class="gauge-sub"><strong>$3,168 spent</strong> · <strong>$117.82 earned</strong> · room for <strong>$29.44 more</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ HOUSEHOLD ═══════════════ -->
+<section id="household">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num"><strong>04</strong> &nbsp;·&nbsp; Household</div>
+      <div>
+        <h2 class="section-title">Built for two. <em>First-class, not bolted on.</em></h2>
+        <p class="section-sub">Most fintech treats money as solo. Vision is built around the way real households actually work — separate accounts, shared bills, common goals, and the negotiations in between.</p>
+      </div>
+    </div>
+
+    <div class="household-grid">
+      <div class="house-card mine">
+        <div class="house-label">MINE</div>
+        <h4>Your money.</h4>
+        <p>Your salary, your checking, your IRA, your card. Private to you. Vision tracks every dollar without exposing the details to anyone you share with.</p>
+        <ul>
+          <li>Personal accounts stay personal</li>
+          <li>Independent budgets and goals</li>
+          <li>Solo cashflow forecast</li>
+        </ul>
+      </div>
+      <div class="house-card yours">
+        <div class="house-label">YOURS</div>
+        <h4>Their money.</h4>
+        <p>Their accounts, their visibility settings, their categories. You see what they choose to share — totals, not transactions, unless they opt in.</p>
+        <ul>
+          <li>Each partner controls their own visibility</li>
+          <li>Granular sharing per account</li>
+          <li>Auto-redacted by default</li>
+        </ul>
+      </div>
+      <div class="house-card ours">
+        <div class="house-label">OURS</div>
+        <h4>The household.</h4>
+        <p>Joint cards, shared rent, the grocery run, the trip to Lisbon. One budget, both can edit, both get notified when things drift.</p>
+        <ul>
+          <li>Shared categories and goals</li>
+          <li>Both partners can edit</li>
+          <li>Push alerts when "Ours" goes over</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRIVACY ═══════════════ -->
+<section class="privacy" id="privacy">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num"><strong>05</strong> &nbsp;·&nbsp; Privacy as a feature</div>
+      <div>
+        <h2 class="section-title">Your bank credentials never <em>touch our servers.</em></h2>
+      </div>
+    </div>
+
+    <div class="privacy-inner">
+      <div>
+        <div class="privacy-statement">
+          We don't say <em>"privacy-first"</em> as a slogan. <strong>We architected the app so we couldn't betray it if we wanted to.</strong>
+        </div>
+        <p class="privacy-detail">
+          Plaid handles every bank connection — your login goes directly to your institution, not to us. We never see your password. We never store it. We can't, by design.
+        </p>
+        <p class="privacy-detail">
+          The tokens that do reach us are AES-256 encrypted at rest. Analytics is opt-in on first launch. No selling data, ever — full stop, no exceptions, no fine print.
+        </p>
+      </div>
+
+      <div class="privacy-facts">
+        <div class="pf-item">
+          <div class="pf-num">01</div>
+          <div class="pf-body">
+            <strong>Plaid for every connection</strong>
+            <span>Bank credentials go directly from you to your institution. We don't see them, store them, or pass them through.</span>
+          </div>
+        </div>
+        <div class="pf-item">
+          <div class="pf-num">02</div>
+          <div class="pf-body">
+            <strong>AES-256 at rest</strong>
+            <span>Every Plaid token, every cached transaction, every preference — encrypted with industry-standard symmetric encryption.</span>
+          </div>
+        </div>
+        <div class="pf-item">
+          <div class="pf-num">03</div>
+          <div class="pf-body">
+            <strong>Sign in with Apple</strong>
+            <span>One-tap auth with Apple's relay email. Don't trust us with your real address? Don't. The product still works the same.</span>
+          </div>
+        </div>
+        <div class="pf-item">
+          <div class="pf-num">04</div>
+          <div class="pf-body">
+            <strong>Analytics is opt-in</strong>
+            <span>Cookie and analytics consent honored on first launch. Decline and the app works exactly the same.</span>
+          </div>
+        </div>
+        <div class="pf-item">
+          <div class="pf-num">05</div>
+          <div class="pf-body">
+            <strong>WCAG 2.1 AA conformant</strong>
+            <span>Accessibility CI gate on every PR via axe-core. Screen-reader tested. Full keyboard support. Accessibility isn't a footnote.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRICING ═══════════════ -->
+<section id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num"><strong>06</strong> &nbsp;·&nbsp; Pricing</div>
+      <div>
+        <h2 class="section-title">Free does the job. <em>Premium does more.</em></h2>
+        <p class="section-sub">The basics — net worth, budget, household, cashflow — are free forever. Premium adds the tax-smart layer that makes Vision worth paying for.</p>
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-head">
+          <div class="price-tier">FREE</div>
+        </div>
+        <div>
+          <div class="price-amount"><span class="currency">$</span>0<span class="period">/forever</span></div>
+          <div class="price-yearly">No credit card to start</div>
+        </div>
+        <ul class="price-features">
+          <li><div>Connect any bank, card, or brokerage via Plaid</div></li>
+          <li><div>Live net worth dashboard</div></li>
+          <li><div>Monthly budget with carryover</div></li>
+          <li><div>Cashflow forecast</div></li>
+          <li><div>Goal tracking with alerts</div></li>
+          <li><div>Mine / Yours / Ours household mode<small>1 household, 2 partners</small></div></li>
+          <li><div>Auto-categorization with overrides</div></li>
+          <li><div>Sign in with Apple, light/dark themes</div></li>
+        </ul>
+        <div class="price-cta">
+          <a href="#" class="btn btn-secondary btn-lg">Start free <span class="arrow">→</span></a>
+        </div>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-head">
+          <div class="price-tier">PREMIUM</div>
+          <div class="price-badge">SAVE 40% YEARLY</div>
+        </div>
+        <div>
+          <div class="price-amount"><span class="currency">$</span>6.99<span class="period">/month</span></div>
+          <div class="price-yearly">or <strong>$49.99/year</strong> — that's $4.17/mo · save $33.89</div>
+        </div>
+        <ul class="price-features">
+          <li><div><strong>Sell Simulator</strong> — tax preview before you trade<small>Short-term vs long-term, side by side</small></div></li>
+          <li><div><strong>Card Optimizer</strong> — KEEP / EVALUATE / DROP recommendations</div></li>
+          <li><div>Unlimited connected accounts</div></li>
+          <li><div>Unlimited households</div></li>
+          <li><div>Tax-lot CSV import for brokerage holdings</div></li>
+          <li><div>Monthly net-worth recap email</div></li>
+          <li><div>Full transaction history beyond 2 years</div></li>
+          <li><div>Priority email support</div></li>
+        </ul>
+        <div class="price-cta">
+          <a href="#" class="btn btn-primary btn-lg">Start 14-day free trial <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPARISON TABLE -->
+    <div class="compare">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th class="us">VISION</th>
+            <th>Mint</th>
+            <th>Copilot</th>
+            <th>Monarch</th>
+            <th>YNAB</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td>Tax-aware Sell Simulator</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>Card Optimizer · wallet score</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>Mine / Yours / Ours household mode</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="partial">partial</span></td>
+            <td><span class="partial">partial</span></td>
+          </tr>
+          <tr>
+            <td>Net worth across all accounts</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="partial">partial</span></td>
+          </tr>
+          <tr>
+            <td>Monthly budget with carryover</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Cashflow forecast</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="partial">basic</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+          </tr>
+          <tr>
+            <td>Bank credentials never on our servers</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Free tier</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+          </tr>
+          <tr class="highlight">
+            <td>Premium annual price</td>
+            <td><span style="color:var(--primary);font-weight:700">$49.99</span></td>
+            <td><span style="color:var(--text-faint)">shut down</span></td>
+            <td>$95</td>
+            <td>$99.99</td>
+            <td>$109</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOUNDER NOTE ═══════════════ -->
+<section class="founder">
+  <div class="container">
+    <div class="founder-inner">
+      <div class="founder-eyebrow">A note from the founder</div>
+      <p class="founder-quote">
+        "I built Vision after almost selling a position at a $1,400 short-term gain — eleven days before it would have been long-term. My broker showed me the gain. <em>Nobody showed me the bill.</em> I'd been spreadsheeting our household finances for years, and the spreadsheet didn't catch it either. So we built the app I wished I'd had."
+      </p>
+      <div class="founder-sig">
+        Axel<br>
+        <small>Founder · Vision Finance</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-num"><strong>07</strong> &nbsp;·&nbsp; Common questions</div>
+      <div>
+        <h2 class="section-title">Things worth asking <em>before you connect a bank.</em></h2>
+      </div>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">Q.01</span>
+          <span>Is Vision a financial advisor or a brokerage?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            No — Vision is a tracking and education tool. We don't place trades, hold custody of any assets, or give personalized investment advice. The Sell Simulator shows you the tax implications of decisions you make on your own brokerage. A registered investing layer ("Vision Invest") is on our roadmap; it'll be a separate, opt-in product.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">Q.02</span>
+          <span>How does Vision connect to my bank?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            Through Plaid — the same connection layer used by Venmo, Robinhood, Coinbase, and most major fintech apps. Your login credentials go directly from you to your bank. Vision never sees, stores, or transmits them. What we get back is a read-only token, encrypted with AES-256 at rest.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">Q.03</span>
+          <span>What's the difference between Free and Premium?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            Free includes net worth, budgeting, cashflow forecast, goals, household mode, and auto-categorization — all the basics. Premium adds the tax-smart layer: the Sell Simulator, Card Optimizer, tax-lot CSV import, unlimited accounts and households, full history beyond 2 years, monthly recap email, and priority support. 14-day free trial, no credit card required.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">Q.04</span>
+          <span>Can my partner and I share an account?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            Yes — Mine / Yours / Ours is core to Vision, even on the free plan. Each of you links your own accounts and chooses what to share. The "Ours" household budget is jointly editable. The "Mine" sections stay private unless you opt in. Premium removes the cap on number of households (helpful if you co-manage finances for a parent or roommates too).
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">Q.05</span>
+          <span>Where can I use Vision?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            The web app is live at visionfinance.app. The iOS app is in App Store review and targeted to launch within 2–3 weeks of this writing. Android is the #1 user request and is on the roadmap. Full keyboard support and accessibility are first-class on every surface.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span class="faq-num">Q.06</span>
+          <span>What happens to my data if I cancel?</span>
+          <span class="faq-toggle">+</span>
+        </button>
+        <div class="faq-a">
+          <div class="faq-a-inner">
+            You can export everything to CSV at any time — your transactions, your categories, your goals, your portfolio lots. Cancel and you keep your free tier; close your account entirely and all data is purged within 30 days. We don't sell data, ever. Full policy at /privacy.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FINAL CTA ═══════════════ -->
+<section class="final-cta">
+  <div class="final-orbit" aria-hidden="true">
+    <svg viewBox="0 0 640 640" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(320,320)" fill="none">
+        <circle cx="0" cy="0" r="170" stroke="rgba(92,124,250,0.35)" stroke-width="1"/>
+        <ellipse cx="0" cy="0" rx="260" ry="108" stroke="rgba(92,124,250,0.28)" stroke-width="1" transform="rotate(-22)"/>
+        <ellipse cx="0" cy="0" rx="215" ry="215" stroke="rgba(92,124,250,0.14)" stroke-width="1" stroke-dasharray="2 8"/>
+        <circle cx="242" cy="-100" r="6" fill="#5C7CFA"/>
+        <circle cx="-170" cy="0" r="3" fill="#6E8BFF"/>
+        <circle cx="105" cy="-175" r="2" fill="rgba(245,247,255,0.5)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="container">
+    <h2>Find your <em>Vision.</em></h2>
+    <p>One app for your net worth, your budget, your investments — and the tax bill before you sell. Free to start. No credit card.</p>
+    <div class="final-ctas">
+      <a href="#" class="btn btn-primary btn-lg">Start free — no card <span class="arrow">→</span></a>
+      <a href="#" class="btn btn-secondary btn-lg">Try Premium 14 days free</a>
+    </div>
+    <div class="final-note">visionfinance.app · iOS coming · Android on the roadmap</div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/vision-logo-v2.png" alt="Vision Finance" class="v-logo-full">
+        <p>Tax-smart money for households who think long-term. One app for your net worth, your budget, and the tax bill before you sell.</p>
+      </div>
+
+      <div class="foot-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#sell-simulator">Sell Simulator</a></li>
+          <li><a href="#card-optimizer">Card Optimizer</a></li>
+          <li><a href="#household">Household mode</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Roadmap</a></li>
+          <li><a href="#">Press kit</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h5>Trust</h5>
+        <ul>
+          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Accessibility</a></li>
+          <li><a href="#">Status</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <div>© 2026 Vision Finance · visionfinance.app</div>
+      <div>Built with care · Plaid · Stripe · Vercel</div>
+    </div>
+
+    <div class="foot-disclaimer">
+      Vision is a financial tracking and education tool. Vision is not a registered investment adviser, broker-dealer, or financial planner. Information shown is for educational purposes only and is not personalized investment, tax, or legal advice. Consult a qualified professional before making investment or tax decisions. Tax estimates rely on user-provided cost basis and standard rate assumptions; your actual liability may vary based on factors not modeled here, including state of residence, AMT, and other personal circumstances.
+    </div>
+  </div>
+</footer>
+
+<!--
+  ═══════════════════════════════════════════════════════════════
+  V3 IMPLEMENTATION NOTES FOR THE DEV TEAM
+
+  COLOR SYSTEM — locked to your Vision_Color_System.html
+  - All colors live in :root[data-theme="dark"] and :root[data-theme="light"]
+  - Brand primary: #5C7CFA (Vision Blue / periwinkle). NOT teal.
+  - Teal #14B8A6 is reserved for positive/gains data only.
+  - To toggle themes: set data-theme="light" on <html>.
+
+  LOGO TREATMENT
+  - Uses the actual provided PNG files (vision-logo-v2.png + vision-icon-v2.png)
+  - Dark theme: filter: brightness(0) invert(1) — converts dark navy strokes to white
+  - Light theme: filter: none — uses original dark navy color
+  - For SVG re-implementation, the dev team can use the SVG you provided directly
+
+  TYPOGRAPHY
+  - Display + body: Geist (Google Fonts, per your color system spec)
+  - Data + labels: JetBrains Mono
+  - Geist has no italic cut — emphasis uses color (--primary-hover) instead
+
+  NEW IN V3 vs V2
+  - "By the Numbers" stats strip with real data points from your app screenshots
+  - Floating UI callouts around the hero phones (the YTD gain, wallet score, budget left)
+  - Dedicated Card Optimizer section with a recreated SVG score gauge
+  - Sell Simulator mockup now matches app card styling exactly (rounded corners, pill
+    badges for percentage gains, teal-on-positive pattern)
+  - Footer uses the actual logo PNG file (no inline SVG fallback)
+  - Card Optimizer added to comparison table as second highlighted differentiator
+
+  ASSETS
+  - All in /assets/
+  - vision-logo-v2.png = full lockup (icon + wordmark)
+  - vision-icon-v2.png = icon only (use for favicons, small contexts)
+  - whatsapp-0..5.jpeg = the new app screenshots
+  - IMG_9710.png and IMG_9715.png = older screenshots used where the new set doesn't
+    have a Top Movers or Recurring Transactions view
+
+  REPLACE BEFORE LAUNCH
+  - Founder quote is a placeholder — swap Axel's real story
+  - "By the Numbers" data points are from the demo/sample data — verify they're OK
+    to show publicly (they look like real-but-anonymized figures)
+  ═══════════════════════════════════════════════════════════════
+-->
+
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.parentElement;
+      const isOpen = item.classList.contains('open');
+      item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', !isOpen);
+    });
+  });
+
+  // Animate score gauge when it scrolls into view
+  if ('IntersectionObserver' in window) {
+    const gauge = document.getElementById('gaugeArc');
+    if (gauge) {
+      // Start with full offset (empty circle), animate to 20% offset (80% filled)
+      gauge.style.strokeDashoffset = '816.8';
+      const gaugeIO = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            // 80/100 of 816.8 = 653.4 filled, 163.36 remaining
+            gauge.style.strokeDashoffset = '163.36';
+            gaugeIO.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 });
+      gaugeIO.observe(gauge.closest('.gauge'));
+    }
+  }
+
+  // Scroll reveal (progressive enhancement)
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const targets = document.querySelectorAll('section > .container > *, .showcase, .feature, .house-card, .price-card, .num-cell');
+    targets.forEach(el => el.classList.add('reveal'));
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    targets.forEach(el => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
