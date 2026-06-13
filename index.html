@@ -602,75 +602,9 @@
  .foot-col a{color:var(--text-secondary);font-size:14px;transition:color 0.2s}
  .foot-col a:hover{color:var(--text)}
  .foot-bottom{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-label);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;gap:24px;flex-wrap:wrap}
- .foot-disclaimer{margin-top:24px;padding-top:24px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-faint);line-height:1.6;max-width:880px;text-transform:none;letter-spacing:0;font-family:var(--font-sans)}    /* ─── Plaid security badge ─── */
-  .plaid-badge{
-    display:inline-flex;align-items:center;gap:14px;
-    padding:14px 20px;border-radius:14px;
-    background:var(--surface);border:1px solid var(--border-strong);
-    margin-top:24px;text-decoration:none;color:inherit;
-    transition:border-color 0.2s, transform 0.2s;
-  }
-  .plaid-badge:hover{border-color:var(--primary);transform:translateY(-2px)}
-  .plaid-badge-mark{
-    width:40px;height:40px;border-radius:9px;
-    background:#FFFFFF;color:#000;
-    display:grid;place-items:center;flex-shrink:0;
-    box-shadow:0 4px 12px -2px rgba(0,0,0,0.4);
-  }
-  .plaid-badge-mark svg{width:24px;height:24px}
-  .plaid-badge-text{display:flex;flex-direction:column;gap:2px}
-  .plaid-badge-label{
-    font-family:var(--font-label);font-size:10px;color:var(--text-muted);
-    text-transform:uppercase;letter-spacing:0.04em;font-weight:600;
-  }
-  .plaid-badge-name{
-    font-family:var(--font-sans);font-size:18px;font-weight:700;
-    color:var(--text);letter-spacing:-0.02em;
-  }
+ .foot-disclaimer{margin-top:24px;padding-top:24px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-faint);line-height:1.6;max-width:880px;text-transform:none;letter-spacing:0;font-family:var(--font-sans)}
 
-  /* ─────────── Theme toggle button ─────────── */
-  .theme-toggle{
-    width:38px;height:38px;border-radius:10px;
-    background:transparent;border:1px solid var(--border-strong);
-    display:grid;place-items:center;cursor:pointer;
-    color:var(--text-secondary);
-    transition:color 0.2s, border-color 0.2s, background 0.2s, transform 0.2s;
-    padding:0;font-family:inherit;flex-shrink:0;
-  }
-  .theme-toggle:hover{
-    color:var(--primary);border-color:var(--primary);
-    background:var(--primary-soft);
-    transform:translateY(-1px);
-  }
-  .theme-toggle svg{width:18px;height:18px}
-  [data-theme="dark"] .theme-icon-moon{display:none}
-  [data-theme="light"] .theme-icon-sun{display:none}
-
-  /* ─────────── LIGHT MODE — color-only overrides ─────────── */
-  /* These four blocks exist only because the elements below have hardcoded
-     dark-colored rgba() backgrounds in their base CSS. Without these, the nav,
-     trust strip, callouts, and Plaid badge mark would still appear navy on a
-     light page. Every other property — font-family, padding, spacing, sizing,
-     shadows, borders, layout — is inherited identically from dark mode. */
-  [data-theme="light"] .nav{
-    background:rgba(246,247,251,0.82);
-  }
-  [data-theme="light"] .trust-strip{
-    background:rgba(231,235,244,0.55);
-  }
-  [data-theme="light"] .callout{
-    background:rgba(255,255,255,0.96);
-    border-color:var(--border-strong);
-    box-shadow:0 14px 38px -10px rgba(20,24,42,0.14);
-  }
-  [data-theme="light"] .callout strong{color:var(--text)}
-  [data-theme="light"] .callout.positive strong{color:var(--positive)}
-  [data-theme="light"] .callout.primary strong{color:var(--primary)}
-  [data-theme="light"] .plaid-badge-mark{
-    background:#0A0E1F;color:#FFFFFF;
-  }
-
-  /* ═══════════════ ANIMATIONS ═══════════════ */
+ /* ═══════════════ ANIMATIONS ═══════════════ */
  @media (prefers-reduced-motion:no-preference){
  .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.8s, transform 0.8s}
  .reveal.in{opacity:1;transform:none}
@@ -718,14 +652,6 @@
  .hero-ctas .btn{width:100%;justify-content:center}
  }
 </style>
-<script>
-    (function(){
-      try {
-        var saved = localStorage.getItem('vision-theme') || 'dark';
-        document.documentElement.setAttribute('data-theme', saved);
-      } catch(e){}
-    })();
-  </script>
 </head>
 <body>
 <!-- Inline SVG mark, reusable via <use>, inherits currentColor for theme-safe rendering -->
@@ -756,19 +682,7 @@
  <a href="#pricing">Pricing</a>
  </div>
  <div class="nav-cta">
- <button class="theme-toggle" aria-label="Toggle light and dark theme" type="button">
-       <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-         <circle cx="12" cy="12" r="4"></circle>
-         <line x1="12" y1="2" x2="12" y2="5"></line><line x1="12" y1="19" x2="12" y2="22"></line>
-         <line x1="4.93" y1="4.93" x2="7.05" y2="7.05"></line><line x1="16.95" y1="16.95" x2="19.07" y2="19.07"></line>
-         <line x1="2" y1="12" x2="5" y2="12"></line><line x1="19" y1="12" x2="22" y2="12"></line>
-         <line x1="4.93" y1="19.07" x2="7.05" y2="16.95"></line><line x1="16.95" y1="7.05" x2="19.07" y2="4.93"></line>
-       </svg>
-       <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-       </svg>
-      </button>
-      <a href="#" class="btn btn-ghost">Sign in</a>
+ <a href="#" class="btn btn-ghost">Sign in</a>
  <a href="#pricing" class="btn btn-primary">Start free <span class="arrow">→</span></a>
  </div>
  </div>
@@ -1263,7 +1177,7 @@
           <span class="plaid-badge-mark">
             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <!-- Stylized P mark, clean geometric -->
-              <path d="M5 3 L5 21 M5 3 L13 3 Q19 3 19 9 Q19 15 13 15 L5 15" stroke="currentColor" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 3 L5 21 M5 3 L13 3 Q19 3 19 9 Q19 15 13 15 L5 15" stroke="#000" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
           <span class="plaid-badge-text">
@@ -1484,7 +1398,7 @@
  "I built Vision after almost selling a position at a $1,400 short-term gain, just eleven days before it would have been long-term. My broker showed me the gain. <em>Nobody showed me the bill.</em> I'd been spreadsheeting our household finances for years, and the spreadsheet didn't catch it either. So we built the app I wished I'd had."
  </p>
  <div class="founder-sig">
- Riley Smith<br>
+ Axel<br>
  <small>Founder · Vision Finance</small>
  </div>
  </div>
@@ -1701,23 +1615,14 @@
  - Trial: 30-day free trial (matches StartTrialView, PricingView, SubscriptionView)
   - Pricing: $4.99/mo or $39.99/yr ($3.33/mo equivalent), card required at trial start
   - Features include: Multi-property, Monthly review email (1st of month), Cash Flow forecast
-  - Founder quote is still a placeholder, swap Riley Smith's real story
+  - Founder quote is still a placeholder, swap Axel's real story
  - "By the Numbers" data points come from demo screenshots, verify ok to publish
  - Comparison table values should be re-verified at launch
  ═══════════════════════════════════════════════════════════════
 -->
 
 <script>
- // ─── Theme toggle (initial theme is set in <head> to prevent FOUC) ───
-  document.querySelector('.theme-toggle')?.addEventListener('click', function() {
-    var root = document.documentElement;
-    var current = root.getAttribute('data-theme') || 'dark';
-    var next = current === 'dark' ? 'light' : 'dark';
-    root.setAttribute('data-theme', next);
-    try { localStorage.setItem('vision-theme', next); } catch(e) {}
-  });
-
-  // FAQ accordion
+ // FAQ accordion
  document.querySelectorAll('.faq-q').forEach(btn => {
  btn.addEventListener('click', () => {
  const item = btn.parentElement;
