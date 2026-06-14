@@ -568,6 +568,53 @@
  .vc-form button{margin-top:2px;font-family:inherit;font-size:14px;font-weight:700;color:#fff;background:var(--primary);border:none;border-radius:10px;padding:11px;cursor:pointer;transition:background 0.15s}
  .vc-form button:hover{background:var(--primary-hover)}
  .vchat-foot{padding:9px 14px;text-align:center;font-size:10px;color:var(--text-faint);border-top:1px solid var(--border);font-family:var(--font-label);letter-spacing:0.06em;text-transform:uppercase}
+ /* ═══════════════ INVESTMENT ROADMAP (interactive banner) ═══════════════ */
+ .roadmap{padding:var(--section) 0}
+ .roadmap-inner{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}
+ .roadmap-tag{display:inline-block;font-family:var(--font-label);font-size:10px;color:var(--primary);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:18px;padding:5px 11px;background:var(--primary-soft);border:1px solid rgba(92,124,250,0.2);border-radius:6px;font-weight:600}
+ .roadmap-stats{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap}
+ .roadmap-stats > div{display:flex;flex-direction:column;gap:4px}
+ .roadmap-stats .rs-k{font-family:var(--font-label);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint)}
+ .roadmap-stats .rs-v{font-size:27px;font-weight:700;letter-spacing:-0.02em;color:var(--positive)}
+ .roadmap-stats .rs-v.con{color:var(--text-secondary);font-size:22px}
+ .roadmap-stats .rs-v.grw{color:var(--positive);font-size:22px}
+ .roadmap-widget{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:26px}
+ .rw-chart svg{width:100%;display:block;overflow:visible}
+ .rw-chart .axis{font-family:var(--font-label);font-size:9px;fill:var(--text-faint)}
+ .rw-legend{display:flex;gap:18px;margin-top:12px;font-family:var(--font-label);font-size:11px;color:var(--text-muted)}
+ .rw-legend span{display:inline-flex;align-items:center;gap:7px}
+ .rw-legend i{width:12px;height:3px;border-radius:2px;display:inline-block}
+ .rw-controls{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+ .rw-ctrl .rw-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;font-size:13.5px;color:var(--text-secondary)}
+ .rw-ctrl .rw-top b{font-family:var(--font-label);font-size:14px;color:var(--text);font-weight:700}
+ .roadmap input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:var(--surface-3);outline:none;cursor:pointer}
+ .roadmap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--primary);border:3px solid var(--surface);box-shadow:0 0 0 1px var(--primary),0 4px 10px -2px var(--primary-glow);cursor:pointer}
+ .roadmap input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--primary);border:3px solid var(--surface);cursor:pointer}
+ .roadmap .rate input[type=range]::-webkit-slider-thumb{background:var(--positive);box-shadow:0 0 0 1px var(--positive),0 4px 10px -2px rgba(20,184,166,0.5)}
+ .rw-note{font-size:11.5px;color:var(--text-faint);line-height:1.5;margin-top:18px}
+ /* order-to-invest horizontal timeline */
+ .invest-order{margin-top:66px}
+ .io-head{text-align:center;margin-bottom:38px}
+ .io-eyebrow{font-family:var(--font-label);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--primary);display:block;margin-bottom:10px}
+ .io-head h3{font-size:clamp(22px,2.4vw,30px);font-weight:700;letter-spacing:-0.02em}
+ .io-head p{font-size:14px;color:var(--text-muted);margin-top:8px}
+ .io-track{position:relative;display:grid;grid-template-columns:repeat(5,1fr)}
+ .io-track::before{content:"";position:absolute;top:21px;left:10%;right:10%;height:2px;background:linear-gradient(90deg,#22C55E,#F59E0B,#5C7CFA,#6E8BFF,#8B93A9);border-radius:2px}
+ .io-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 10px;position:relative}
+ .io-node{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-label);font-size:16px;font-weight:700;color:#fff;background:var(--ac);box-shadow:0 0 0 5px var(--bg),0 8px 20px -6px var(--ac);position:relative;z-index:2}
+ .io-card{margin-top:18px}
+ .io-where{font-size:15px;font-weight:700;color:var(--text)}
+ .io-note{font-size:12.5px;color:var(--text-muted);margin:5px auto 0;line-height:1.45;max-width:20ch}
+ .io-tag{display:inline-block;margin-top:11px;font-family:var(--font-label);font-size:10.5px;font-weight:600;color:var(--ac);background:color-mix(in srgb,var(--ac) 13%,transparent);border:1px solid color-mix(in srgb,var(--ac) 32%,transparent);border-radius:20px;padding:4px 11px}
+ @media(max-width:760px){
+  .io-track{grid-template-columns:1fr;gap:12px}
+  .io-track::before{display:none}
+  .io-step{flex-direction:row;text-align:left;gap:14px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:14px}
+  .io-node{width:36px;height:36px;font-size:14px;box-shadow:none;flex:none}
+  .io-card{margin-top:0}
+  .io-note{max-width:none;margin:4px 0 0}
+ }
+ @media(max-width:900px){.roadmap-inner{grid-template-columns:1fr;gap:34px}}
  @media(max-width:480px){.vchat-panel{width:calc(100vw - 24px);height:72vh}}
  .showcase-glow{
  position:absolute;width:520px;height:520px;
@@ -1302,6 +1349,67 @@
  </div>
 </section>
 
+<!-- ═══════════════ INVESTMENT ROADMAP (interactive) ═══════════════ -->
+<section id="roadmap" class="roadmap">
+ <div class="container roadmap-inner">
+  <div class="roadmap-copy">
+   <span class="roadmap-tag">Growth projection</span>
+   <h2 class="section-title">Watch your money <em>compound.</em></h2>
+   <p class="section-sub">Plug in what you've invested and what you add each month — Vision projects the curve, contributions versus growth, at the return you choose. Drag the sliders and play with it.</p>
+   <div class="roadmap-stats">
+    <div><span class="rs-k">Projected balance</span><span class="rs-v" id="irTotal">$0</span></div>
+    <div><span class="rs-k">You contribute</span><span class="rs-v con" id="irContrib">$0</span></div>
+    <div><span class="rs-k">Growth</span><span class="rs-v grw" id="irGrowth">+$0</span></div>
+   </div>
+  </div>
+  <div class="roadmap-widget">
+   <div class="rw-chart">
+    <svg id="irChart" viewBox="0 0 360 210" preserveAspectRatio="none">
+     <defs>
+      <linearGradient id="irGTotal" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5C7CFA" stop-opacity="0.5"/><stop offset="100%" stop-color="#5C7CFA" stop-opacity="0.02"/></linearGradient>
+      <linearGradient id="irGCon" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8B93A9" stop-opacity="0.28"/><stop offset="100%" stop-color="#8B93A9" stop-opacity="0.02"/></linearGradient>
+     </defs>
+     <g id="irGrid"></g>
+     <path id="irAreaTotal" fill="url(#irGTotal)"></path>
+     <path id="irAreaCon" fill="url(#irGCon)"></path>
+     <path id="irLineTotal" fill="none" stroke="#6E8BFF" stroke-width="2.5" stroke-linejoin="round"></path>
+     <path id="irLineCon" fill="none" stroke="#8B93A9" stroke-width="1.6" stroke-dasharray="4 4" stroke-linejoin="round"></path>
+     <circle id="irEndDot" r="5" fill="#14B8A6" stroke="#0a0e1f" stroke-width="2"></circle>
+     <g id="irXlabels"></g>
+     <g id="irYlabels"></g>
+    </svg>
+   </div>
+   <div class="rw-legend">
+    <span><i style="background:#6E8BFF"></i>Total balance</span>
+    <span><i style="background:#8B93A9"></i>Contributions</span>
+    <span><i style="background:#14B8A6;width:9px;height:9px;border-radius:50%"></i>Growth on top</span>
+   </div>
+   <div class="rw-controls">
+    <div class="rw-ctrl"><div class="rw-top"><span>Current investments</span><b id="irvCur">$10,000</b></div><input type="range" id="irCur" min="0" max="250000" step="500" value="10000"></div>
+    <div class="rw-ctrl"><div class="rw-top"><span>Monthly contribution</span><b id="irvMon">$500</b></div><input type="range" id="irMon" min="0" max="3000" step="25" value="500"></div>
+    <div class="rw-ctrl"><div class="rw-top"><span>Time horizon</span><b id="irvYr">30 yrs</b></div><input type="range" id="irYr" min="5" max="40" step="1" value="30"></div>
+    <div class="rw-ctrl rate"><div class="rw-top"><span>Expected annual return</span><b id="irvRate">8%</b></div><input type="range" id="irRate" min="3" max="12" step="0.5" value="8"></div>
+   </div>
+   <p class="rw-note">Assumes monthly compounding and steady contributions. A projection for planning — not investment advice.</p>
+  </div>
+ </div>
+<div class="container">
+ <div class="invest-order">
+  <div class="io-head">
+   <span class="io-eyebrow">The roadmap</span>
+   <h3>Where your next dollar should go</h3>
+   <p>Fill each tier before moving to the next — Vision shows you which one is up.</p>
+  </div>
+  <div class="io-track">
+   <div class="io-step" style="--ac:#22C55E"><div class="io-node">1</div><div class="io-card"><div class="io-where">401(k) match</div><div class="io-note">Free money from your employer.</div><span class="io-tag">100% ROI</span></div></div>
+   <div class="io-step" style="--ac:#F59E0B"><div class="io-node">2</div><div class="io-card"><div class="io-where">High-interest debt</div><div class="io-note">Pay off anything above ~10%.</div><span class="io-tag">10%+</span></div></div>
+   <div class="io-step" style="--ac:#5C7CFA"><div class="io-node">3</div><div class="io-card"><div class="io-where">Roth IRA</div><div class="io-note">Tax-free growth, up to the limit.</div><span class="io-tag">$7,000/yr</span></div></div>
+   <div class="io-step" style="--ac:#6E8BFF"><div class="io-node">4</div><div class="io-card"><div class="io-where">401(k) — again</div><div class="io-note">Max it out beyond the match.</div><span class="io-tag">$23,500</span></div></div>
+   <div class="io-step" style="--ac:#8B93A9"><div class="io-node">5</div><div class="io-card"><div class="io-where">Brokerage</div><div class="io-note">Taxed, but flexible. No cap.</div><span class="io-tag">Flexible</span></div></div>
+  </div>
+ </div>
+</div>
+</section>
 <!-- ═══════════════ HOUSEHOLD ═══════════════ -->
 <section id="household">
  <div class="container">
@@ -2105,6 +2213,34 @@
  launch.addEventListener('click',function(){ root.classList.toggle('open'); if(root.classList.contains('open')) begin(); });
  closeBtn.addEventListener('click',function(){ root.classList.remove('open'); });
  backBtn.addEventListener('click',back);
+})();
+</script>
+<script>
+(function(){
+ var g=function(id){return document.getElementById(id);};
+ if(!g('irChart')) return;
+ var fmt=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
+ var fmtShort=function(n){ if(n>=1e6) return '$'+(n/1e6).toFixed(n>=1e7?0:1)+'M'; if(n>=1e3) return '$'+Math.round(n/1e3)+'k'; return '$'+Math.round(n); };
+ var W=360,H=210,padL=36,padR=10,padT=12,padB=22;
+ function project(P,monthly,years,ratePct){ var r=ratePct/100/12,months=years*12,bal=P,con=P,pts=[{y:0,bal:bal,con:con}]; for(var m=1;m<=months;m++){ bal=bal*(1+r)+monthly; con+=monthly; if(m%12===0) pts.push({y:m/12,bal:bal,con:con}); } return pts; }
+ function redraw(){
+  var P=+g('irCur').value,monthly=+g('irMon').value,years=+g('irYr').value,rate=+g('irRate').value;
+  g('irvCur').textContent=fmt(P); g('irvMon').textContent=fmt(monthly); g('irvYr').textContent=years+' yrs'; g('irvRate').textContent=rate+'%';
+  var pts=project(P,monthly,years,rate),last=pts[pts.length-1],maxY=Math.max(last.bal,1);
+  g('irTotal').textContent=fmt(last.bal); g('irContrib').textContent=fmt(last.con); g('irGrowth').textContent='+'+fmt(last.bal-last.con);
+  var x=function(yr){return padL+(yr/years)*(W-padL-padR);}, y=function(v){return H-padB-(v/maxY)*(H-padT-padB);};
+  var tp=pts.map(function(p){return x(p.y)+','+y(p.bal);}), cp=pts.map(function(p){return x(p.y)+','+y(p.con);}), baseY=y(0);
+  g('irLineTotal').setAttribute('d','M'+tp.join(' L')); g('irLineCon').setAttribute('d','M'+cp.join(' L'));
+  g('irAreaTotal').setAttribute('d','M'+x(0)+','+baseY+' L'+tp.join(' L')+' L'+x(years)+','+baseY+' Z');
+  g('irAreaCon').setAttribute('d','M'+x(0)+','+baseY+' L'+cp.join(' L')+' L'+x(years)+','+baseY+' Z');
+  g('irEndDot').setAttribute('cx',x(years)); g('irEndDot').setAttribute('cy',y(last.bal));
+  var grid='',yl='',i,v,gy; for(i=0;i<=3;i++){ v=maxY*i/3; gy=y(v); grid+='<line x1="'+padL+'" y1="'+gy+'" x2="'+(W-padR)+'" y2="'+gy+'" stroke="#232B45" stroke-width="1"/>'; yl+='<text class="axis" x="'+(padL-6)+'" y="'+(gy+3)+'" text-anchor="end">'+fmtShort(v)+'</text>'; }
+  g('irGrid').innerHTML=grid; g('irYlabels').innerHTML=yl;
+  var xl='',ticks=[0,Math.round(years/2),years]; ticks.forEach(function(t){ xl+='<text class="axis" x="'+x(t)+'" y="'+(H-6)+'" text-anchor="middle">'+(t===0?'Now':('Yr '+t))+'</text>'; });
+  g('irXlabels').innerHTML=xl;
+ }
+ ['irCur','irMon','irYr','irRate'].forEach(function(id){ g(id).addEventListener('input',redraw); });
+ redraw();
 })();
 </script>
 </body>
