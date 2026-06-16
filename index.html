@@ -61,7 +61,7 @@
 
  /* Layout */
  --gutter:32px;
- --section:120px;
+ --section:60px;
  --maxw:1280px;
 
  color-scheme:dark;
@@ -105,7 +105,7 @@
 
  /* Layout, identical to dark, so structure never shifts on toggle */
  --gutter:32px;
- --section:120px;
+ --section:60px;
  --maxw:1280px;
 
  color-scheme:light;
@@ -358,7 +358,7 @@
 
  /* ═══════════════ SECTIONS ═══════════════ */
  section{padding:var(--section) 0;position:relative}
- .section-head{display:grid;grid-template-columns:auto 1fr;gap:48px;margin-bottom:72px;align-items:end}
+ .section-head{display:grid;grid-template-columns:auto 1fr;gap:48px;margin-bottom:40px;align-items:end}
  .section-num{
  font-family:var(--font-label);font-size:11px;font-weight:600;color:var(--text-muted);
  text-transform:uppercase;letter-spacing:0.05em;
@@ -476,7 +476,7 @@
  }
 
  /* ═══════════════ SHOWCASE ROWS ═══════════════ */
- .showcase{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:120px}
+ .showcase{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-bottom:64px}
  .showcase:last-child{margin-bottom:0}
  .showcase.reverse{direction:rtl}
  .showcase.reverse > *{direction:ltr}
