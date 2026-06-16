@@ -1446,13 +1446,13 @@
  <div class="privacy-inner">
  <div>
  <div class="privacy-statement">
- We don't say <em>"privacy-first"</em> as a slogan. <strong>We architected the app so we couldn't betray it if we wanted to.</strong>
+ We didn't make privacy a slogan. <strong>We built the app so we can't see what we don't need to, and can't sell what we do.</strong>
  </div>
  <p class="privacy-detail">
- Plaid handles every bank connection, your login goes directly to your institution, not to us. We never see your password. We never store it. We can't, by design.
+ Your login goes straight to your bank through Plaid, never to us. We don't see your password, and we can't store it. By design.
  </p>
  <p class="privacy-detail">
- The tokens that do reach us are AES-256 encrypted at rest. Analytics is opt-in on first launch. No selling data, ever. Full stop, no exceptions, no fine print.
+ The tokens we do hold are AES-256 encrypted and everything moves over TLS. We never sell, rent, or share your data, and you can disconnect or delete it anytime.
  </p>
         <a href="https://plaid.com" target="_blank" rel="noopener" class="plaid-badge" aria-label="Bank connections powered by Plaid">
           <span class="plaid-badge-mark">
@@ -1474,35 +1474,35 @@
  <div class="pf-num">01</div>
  <div class="pf-body">
  <strong>Plaid for every connection</strong>
- <span>Bank credentials go directly from you to your institution. We don't see them, store them, or pass them through.</span>
+ <span>Your login goes straight to your institution through Plaid (SOC 2 Type II, PCI DSS). We never see, store, or pass through your credentials.</span>
  </div>
  </div>
  <div class="pf-item">
  <div class="pf-num">02</div>
  <div class="pf-body">
- <strong>AES-256 at rest</strong>
- <span>Every Plaid token, every cached transaction, every preference, encrypted with industry-standard symmetric encryption.</span>
+ <strong>Encrypted in transit and at rest</strong>
+ <span>TLS 1.2+ on the wire, and the Plaid access tokens we hold are AES-256 encrypted at rest. Secrets never live in our code.</span>
  </div>
  </div>
  <div class="pf-item">
  <div class="pf-num">03</div>
  <div class="pf-body">
- <strong>Sign in with Apple</strong>
- <span>One-tap auth with Apple's relay email. Don't trust us with your real address? Don't. The product still works the same.</span>
+ <strong>Session-only by design</strong>
+ <span>Your balances, transactions, and holdings are cached only for your active session, never written to long-term storage.</span>
  </div>
  </div>
  <div class="pf-item">
  <div class="pf-num">04</div>
  <div class="pf-body">
- <strong>Analytics is opt-in</strong>
- <span>Cookie and analytics consent honored on first launch. Decline and the app works exactly the same.</span>
+ <strong>Never sold, never shared</strong>
+ <span>We don't sell, rent, or share your financial data for marketing. No third-party ad or tracking cookies, ever.</span>
  </div>
  </div>
  <div class="pf-item">
  <div class="pf-num">05</div>
  <div class="pf-body">
- <strong>WCAG 2.1 AA conformant</strong>
- <span>Accessibility CI gate on every PR via axe-core. Screen-reader tested. Full keyboard support. Accessibility isn't a footnote.</span>
+ <strong>Your data, your call</strong>
+ <span>Disconnect any bank in a tap, or delete your account anytime with Plaid tokens revoked within 24 hours. Export your data whenever. GDPR and CCPA rights honored.</span>
  </div>
  </div>
  </div>
