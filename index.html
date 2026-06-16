@@ -571,22 +571,22 @@
  .vc-form button:hover{background:var(--primary-hover)}
  .vchat-foot{padding:9px 14px;text-align:center;font-size:10px;color:var(--text-faint);border-top:1px solid var(--border);font-family:var(--font-label);letter-spacing:0.06em;text-transform:uppercase}
  /* ═══════════════ INVESTMENT ROADMAP (interactive banner) ═══════════════ */
- .roadmap{padding:var(--section) 0}
+ .roadmap{padding:48px 0}
  .roadmap-inner{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}
  .roadmap-tag{display:inline-block;font-family:var(--font-label);font-size:10px;color:var(--primary);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:18px;padding:5px 11px;background:var(--primary-soft);border:1px solid rgba(92,124,250,0.2);border-radius:6px;font-weight:600}
- .roadmap-stats{display:flex;gap:30px;margin-top:30px;flex-wrap:wrap}
+ .roadmap-stats{display:flex;gap:24px;margin-top:16px;flex-wrap:wrap}
  .roadmap-stats > div{display:flex;flex-direction:column;gap:4px}
  .roadmap-stats .rs-k{font-family:var(--font-label);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-faint)}
- .roadmap-stats .rs-v{font-size:27px;font-weight:700;letter-spacing:-0.02em;color:var(--positive)}
+ .roadmap-stats .rs-v{font-size:22px;font-weight:700;letter-spacing:-0.02em;color:var(--positive)}
  .roadmap-stats .rs-v.con{color:var(--text-secondary);font-size:22px}
  .roadmap-stats .rs-v.grw{color:var(--positive);font-size:22px}
  .roadmap-widget{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:26px}
- .rw-chart svg{width:100%;display:block;overflow:visible}
+ .rw-chart svg{width:100%;height:220px;display:block;overflow:visible}
  .rw-chart .axis{font-family:var(--font-label);font-size:9px;fill:var(--text-faint)}
  .rw-legend{display:flex;gap:18px;margin-top:12px;font-family:var(--font-label);font-size:11px;color:var(--text-muted)}
  .rw-legend span{display:inline-flex;align-items:center;gap:7px}
  .rw-legend i{width:12px;height:3px;border-radius:2px;display:inline-block}
- .rw-controls{display:flex;flex-direction:column;gap:16px;margin-top:24px}
+ .rw-controls{display:flex;flex-direction:column;gap:12px;margin-top:16px}
  .rw-ctrl .rw-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;font-size:13.5px;color:var(--text-secondary)}
  .rw-ctrl .rw-top b{font-family:var(--font-label);font-size:14px;color:var(--text);font-weight:700}
  .roadmap input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:6px;background:var(--surface-3);outline:none;cursor:pointer}
@@ -1370,6 +1370,8 @@
    <p class="rw-note">Assumes monthly compounding and steady contributions. A projection for planning — not investment advice.</p>
   </div>
  </div>
+</section>
+<section class="roadmap" style="padding-top:0">
 <div class="container">
  <div class="invest-order">
   <div class="io-head">
@@ -1847,7 +1849,7 @@
  </div>
 
  <div class="foot-bottom">
- <div>Vision Financial, Inc.</div>
+ <div>Vision Financial Inc.</div>
  <div>Built with care · Plaid · Stripe · Vercel</div>
  </div>
 
