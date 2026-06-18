@@ -43,6 +43,7 @@
  --text-faint:#5C6479;
  --phone-bezel:#05070f;
  --phone-shadow:0 26px 56px -30px rgba(0,0,0,0.5);
+ --callout-bg:rgba(21,27,48,0.92);
 
  /* Semantic, shared */
  --positive:#14B8A6;
@@ -90,6 +91,7 @@
  --text-faint:#A8AFC4;
  --phone-bezel:#FFFFFF;
  --phone-shadow:0 16px 38px -24px rgba(20,24,42,0.12);
+ --callout-bg:rgba(255,255,255,0.95);
 
  /* Semantic colors, shared across themes */
  --positive:#2563EB;
@@ -258,10 +260,10 @@
  /* Floating data callouts that "pull out" of the phones */
  .callout{
  position:absolute;z-index:5;
- background:rgba(21,27,48,0.92);backdrop-filter:blur(16px);
+ background:var(--callout-bg);backdrop-filter:blur(16px);
  border:1px solid var(--border-strong);
  padding:14px 18px;border-radius:14px;
- box-shadow:0 20px 50px -15px rgba(0,0,0,0.7);
+ box-shadow:var(--phone-shadow);
  font-family:var(--font-label);font-size:11px;font-weight:600;color:var(--text-muted);
  text-transform:uppercase;letter-spacing:0.06em;
  animation:floaty 6s ease-in-out infinite;
