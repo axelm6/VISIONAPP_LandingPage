@@ -162,12 +162,12 @@
  .nav-links a:hover{color:var(--text)}
  .nav-cta{display:flex;gap:10px;align-items:center}
  /* Theme toggle in nav (top-right) */
- .nav-theme{position:fixed;bottom:22px;right:22px;z-index:200;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--surface);color:var(--text);border:1px solid var(--border-strong);box-shadow:0 10px 28px -10px rgba(20,24,42,0.30);transition:transform 0.15s,border-color 0.2s,background 0.2s}
+ .nav-theme{position:fixed;bottom:22px;right:22px;z-index:200;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--surface);color:var(--text);border:1px solid var(--border-strong);box-shadow:0 10px 28px -10px rgba(20,24,42,0.30);transition:transform 0.15s,border-color 0.2s,background 0.2s}
  .nav-theme:hover{color:var(--primary);border-color:var(--primary);transform:translateY(-2px)}
  .nav-theme svg{width:20px;height:20px}
- .nav-ig{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;color:var(--text-secondary);border:1px solid var(--border-strong);transition:color 0.2s,border-color 0.2s,background 0.2s}
- .nav-ig:hover{color:var(--primary);border-color:var(--primary);background:var(--surface)}
- .nav-ig svg{width:19px;height:19px}
+ .nav-ig{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;color:#fff;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);border:none;box-shadow:0 6px 18px -6px rgba(220,39,67,0.55);transition:transform 0.2s,box-shadow 0.2s}
+ .nav-ig:hover{transform:translateY(-2px);box-shadow:0 12px 26px -6px rgba(220,39,67,0.65)}
+ .nav-ig svg{width:22px;height:22px}
  .nav-theme .ic-moon{display:none}
  :root[data-theme="light"] .nav-theme .ic-sun{display:none}
  :root[data-theme="light"] .nav-theme .ic-moon{display:block}
@@ -828,10 +828,11 @@
  <a href="#pricing">Pricing</a>
  </div>
  <div class="nav-cta">
- <button class="nav-theme" onclick="toggleTheme()" aria-label="Toggle light or dark theme" title="Toggle theme"><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
- <a class="nav-ig" href="https://www.instagram.com/visionfinance.app/" target="_blank" rel="noopener" aria-label="Follow Vision on Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+ 
+ 
  <a href="#" class="btn btn-ghost">Sign in</a>
  <a href="#pricing" class="btn btn-primary">Start free <span class="arrow">→</span></a>
+ <a class="nav-ig" href="https://www.instagram.com/visionfinance.app/" target="_blank" rel="noopener" aria-label="Follow Vision on Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
  </div>
  </div>
 </nav>
@@ -2049,5 +2050,6 @@
  redraw();
 })();
 </script>
+<button class="nav-theme" onclick="toggleTheme()" aria-label="Toggle light or dark theme" title="Toggle theme"><svg class="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M2 12h2.2M19.8 12H22M4.6 4.6l1.6 1.6M17.8 17.8l1.6 1.6M4.6 19.4l1.6-1.6M17.8 6.2l1.6-1.6"/></svg><svg class="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
 </body>
 </html>
