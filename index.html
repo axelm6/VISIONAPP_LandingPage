@@ -41,6 +41,8 @@
  --text-secondary:#B5BDD0;
  --text-muted:#8B93A9;
  --text-faint:#5C6479;
+ --phone-bezel:#05070f;
+ --phone-shadow:0 26px 56px -30px rgba(0,0,0,0.5);
 
  /* Semantic, shared */
  --positive:#14B8A6;
@@ -86,6 +88,8 @@
  --text-secondary:#4C5573;
  --text-muted:#828BA6;
  --text-faint:#A8AFC4;
+ --phone-bezel:#FFFFFF;
+ --phone-shadow:0 16px 38px -24px rgba(20,24,42,0.12);
 
  /* Semantic colors, shared across themes */
  --positive:#2563EB;
@@ -240,11 +244,8 @@
  position:absolute;width:280px;aspect-ratio:9 / 19.5;
  border-radius:36px;overflow:hidden;
  border:1px solid var(--border-strong);
- box-shadow:
- 0 40px 100px -25px rgba(0,0,0,0.8),
- 0 0 0 1px rgba(255,255,255,0.04),
- inset 0 0 0 5px #000;
- background:#000;
+ box-shadow:var(--phone-shadow),inset 0 0 0 5px var(--phone-bezel);
+ background:var(--phone-bezel);
  transition:transform 0.7s cubic-bezier(0.22,1,0.36,1);
  }
  .phone img{width:100%;display:block}
@@ -303,7 +304,7 @@
  .tour-stage{position:relative;height:600px;margin-top:28px;display:flex;align-items:center;justify-content:center}
  .tour-deck{position:relative;width:100%;max-width:var(--maxw);height:100%;margin:0 auto;perspective:1700px}
  .tour-card{position:absolute;top:50%;left:50%;width:264px;height:558px;margin:-279px 0 0 -132px;cursor:pointer;transition:transform 0.55s cubic-bezier(.22,1,.36,1),opacity 0.45s ease;will-change:transform,opacity;transform-style:preserve-3d}
- .tour-phone{width:100%;height:100%;border-radius:32px;border:1px solid var(--border-strong);background:#05070f;box-shadow:0 32px 70px -28px rgba(0,0,0,0.85);overflow:hidden;position:relative;transition:border-color 0.4s,box-shadow 0.4s}
+ .tour-phone{width:100%;height:100%;border-radius:32px;border:1px solid var(--border-strong);background:var(--phone-bezel);box-shadow:var(--phone-shadow);overflow:hidden;position:relative;transition:border-color 0.4s,box-shadow 0.4s}
  .tour-phone img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
  .tour-phone.flip img{position:absolute;inset:0;transition:opacity 0.45s ease}
  .tour-phone.flip .f1{opacity:0}
@@ -314,7 +315,7 @@
  .tour-mini button{width:9px;height:9px;border-radius:50%;background:var(--text-muted);border:none;cursor:pointer;padding:0;transition:all 0.2s}
  .tour-mini button:hover{background:var(--text-secondary)}
  .tour-mini button.on{background:var(--primary);width:24px;border-radius:5px}
- .tour-phone::after{content:'';position:absolute;inset:0;border-radius:32px;box-shadow:inset 0 0 0 5px #05070f, inset 0 0 0 6px var(--border);pointer-events:none}
+ .tour-phone::after{content:'';position:absolute;inset:0;border-radius:32px;box-shadow:inset 0 0 0 5px var(--phone-bezel), inset 0 0 0 6px var(--border);pointer-events:none}
  .tour-card.is-active .tour-phone{border-color:var(--primary);box-shadow:0 36px 90px -26px var(--primary-glow)}
  .tour-ui{margin-top:52px}
  .tour-meta{text-align:center;max-width:520px;margin:0 auto;min-height:96px}
@@ -510,11 +511,8 @@
  position:relative;width:310px;max-width:100%;aspect-ratio:9 / 19.5;
  border-radius:40px;overflow:hidden;
  border:1px solid var(--border-strong);
- box-shadow:
- 0 40px 100px -25px rgba(0,0,0,0.75),
- 0 0 0 1px rgba(255,255,255,0.04),
- inset 0 0 0 5px #000;
- background:#000;z-index:2;
+ box-shadow:var(--phone-shadow),inset 0 0 0 5px var(--phone-bezel);
+ background:var(--phone-bezel);z-index:2;
  }
  .showcase-phone img{width:100%;display:block}
  .sc-carousel{position:relative;margin-top:8px}
