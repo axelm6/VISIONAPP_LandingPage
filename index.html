@@ -162,9 +162,9 @@
  .nav-links a:hover{color:var(--text)}
  .nav-cta{display:flex;gap:10px;align-items:center}
  /* Theme toggle in nav (top-right) */
- .nav-theme{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;cursor:pointer;background:transparent;color:var(--text-secondary);border:1px solid var(--border-strong);transition:color 0.2s,border-color 0.2s,background 0.2s}
- .nav-theme:hover{color:var(--text);border-color:var(--primary);background:var(--surface)}
- .nav-theme svg{width:19px;height:19px}
+ .nav-theme{position:fixed;bottom:22px;right:22px;z-index:200;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--surface);color:var(--text);border:1px solid var(--border-strong);box-shadow:0 10px 28px -10px rgba(20,24,42,0.30);transition:transform 0.15s,border-color 0.2s,background 0.2s}
+ .nav-theme:hover{color:var(--primary);border-color:var(--primary);transform:translateY(-2px)}
+ .nav-theme svg{width:20px;height:20px}
  .nav-theme .ic-moon{display:none}
  :root[data-theme="light"] .nav-theme .ic-sun{display:none}
  :root[data-theme="light"] .nav-theme .ic-moon{display:block}
@@ -522,54 +522,6 @@
  .sc-dots{display:flex;gap:9px;align-items:center}
  .sc-dot{width:8px;height:8px;border-radius:50%;background:var(--border-strong);border:none;cursor:pointer;transition:all 0.25s;padding:0}
  .sc-dot.is-active{background:var(--primary);width:26px;border-radius:5px}
- /* ═══════════════ AI CHAT WIDGET ═══════════════ */
- .vchat{position:fixed;right:22px;bottom:22px;z-index:300;font-family:var(--font-sans)}
- .vchat-launch{width:58px;height:58px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(145deg,var(--primary-hover),var(--primary));box-shadow:0 14px 32px -8px var(--primary-glow);display:flex;align-items:center;justify-content:center;transition:transform 0.2s}
- .vchat-launch:hover{transform:translateY(-2px) scale(1.04)}
- .vchat-launch svg{width:28px;height:28px}
- .vchat-launch .vc-close-ico{display:none}
- .vchat.open .vc-open-ico{display:none}
- .vchat.open .vc-close-ico{display:block}
- .vchat-panel{position:absolute;bottom:74px;right:0;width:362px;max-width:calc(100vw - 32px);height:524px;max-height:calc(100vh - 120px);background:var(--bg-elevated);border:1px solid var(--border-strong);border-radius:20px;box-shadow:0 30px 80px -22px rgba(0,0,0,0.65);display:flex;flex-direction:column;overflow:hidden;opacity:0;transform:translateY(14px) scale(0.97);pointer-events:none;transition:opacity 0.25s,transform 0.25s}
- .vchat.open .vchat-panel{opacity:1;transform:none;pointer-events:auto}
- .vchat-head{display:flex;align-items:center;gap:12px;padding:15px 16px;border-bottom:1px solid var(--border);background:var(--surface)}
- .vc-avatar{width:38px;height:38px;border-radius:50%;flex:none;background:linear-gradient(145deg,var(--primary-hover),var(--primary));display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px -4px var(--primary-glow);color:#fff}
- .vc-avatar svg{width:22px;height:22px}
- .vc-head-name{font-size:14px;font-weight:700;color:var(--text)}
- .vc-head-status{font-size:11.5px;color:var(--text-muted);display:flex;align-items:center;gap:6px}
- .vc-head-status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--up)}
- .vc-head-close{margin-left:auto;background:none;border:none;color:var(--text-muted);cursor:pointer;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center}
- .vc-head-close:hover{background:var(--surface-2);color:var(--text)}
- .vc-head-close svg{width:18px;height:18px}
- .vc-head-back{background:none;border:none;color:var(--text-muted);cursor:pointer;width:30px;height:30px;border-radius:8px;display:none;align-items:center;justify-content:center;margin-right:2px}
- .vc-head-back.show{display:flex}
- .vc-head-back:hover{background:var(--surface-2);color:var(--text)}
- .vc-head-back svg{width:18px;height:18px}
- .vchat-body{flex:1;overflow-y:auto;padding:18px;display:flex;flex-direction:column;gap:11px}
- .vc-row{display:flex;gap:9px;align-items:flex-end}
- .vc-row.user{justify-content:flex-end}
- .vc-mini{width:28px;height:28px;border-radius:50%;flex:none;background:linear-gradient(145deg,var(--primary-hover),var(--primary));display:flex;align-items:center;justify-content:center;color:#fff}
- .vc-mini svg{width:15px;height:15px}
- .vc-bubble{font-size:14px;line-height:1.5;padding:11px 14px;border-radius:15px;max-width:78%}
- .vc-row.bot .vc-bubble{background:var(--surface-2);color:var(--text);border-bottom-left-radius:5px}
- .vc-row.user .vc-bubble{background:var(--primary);color:#fff;border-bottom-right-radius:5px}
- .vc-options{display:flex;flex-direction:column;gap:8px;align-items:flex-start;padding-left:37px}
- .vc-chip{font-size:13px;font-weight:500;color:var(--primary-hover);background:var(--primary-soft);border:1px solid rgba(92,124,250,0.3);border-radius:14px;padding:9px 14px;cursor:pointer;text-align:left;transition:all 0.15s;font-family:inherit}
- .vc-chip:hover{background:var(--primary);color:#fff;border-color:var(--primary)}
- .vc-chip.rep{background:var(--primary);color:#fff;border-color:var(--primary);font-weight:600}
- .vc-chip.rep:hover{background:var(--primary-hover)}
- .vc-typing{display:flex;gap:4px;padding:13px 14px;background:var(--surface-2);border-radius:15px;border-bottom-left-radius:5px;width:fit-content}
- .vc-typing span{width:6px;height:6px;border-radius:50%;background:var(--text-muted);animation:vcblink 1.2s infinite}
- .vc-typing span:nth-child(2){animation-delay:0.2s}
- .vc-typing span:nth-child(3){animation-delay:0.4s}
- @keyframes vcblink{0%,60%,100%{opacity:0.3}30%{opacity:1}}
- .vc-form{display:flex;flex-direction:column;gap:9px;padding-left:37px}
- .vc-form input{width:100%;font-family:inherit;font-size:13.5px;color:var(--text);background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;padding:11px 13px;outline:none;transition:border-color 0.15s}
- .vc-form input:focus{border-color:var(--primary)}
- .vc-err{font-size:12px;color:var(--negative);display:none}
- .vc-form button{margin-top:2px;font-family:inherit;font-size:14px;font-weight:700;color:#fff;background:var(--primary);border:none;border-radius:10px;padding:11px;cursor:pointer;transition:background 0.15s}
- .vc-form button:hover{background:var(--primary-hover)}
- .vchat-foot{padding:9px 14px;text-align:center;font-size:10px;color:var(--text-faint);border-top:1px solid var(--border);font-family:var(--font-label);letter-spacing:0.06em;text-transform:uppercase}
  /* ═══════════════ INVESTMENT ROADMAP (interactive banner) ═══════════════ */
  .roadmap{padding:48px 0}
  .roadmap-inner{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}
@@ -617,7 +569,6 @@
   .io-note{max-width:none;margin:4px 0 0}
  }
  @media(max-width:900px){.roadmap-inner{grid-template-columns:1fr;gap:34px}}
- @media(max-width:480px){.vchat-panel{width:calc(100vw - 24px);height:72vh}}
  .showcase-glow{
  position:absolute;width:520px;height:520px;
  background:radial-gradient(circle, var(--primary-glow), transparent 60%);
@@ -793,6 +744,8 @@
  .foot-col a{color:var(--text-secondary);font-size:14px;transition:color 0.2s}
  .foot-col a:hover{color:var(--text)}
  .foot-bottom{display:flex;justify-content:space-between;align-items:center;font-family:var(--font-label);font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.16em;gap:24px;flex-wrap:wrap}
+ .foot-social{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:11px;color:var(--text-secondary);border:1px solid var(--border-strong);margin-top:20px;transition:color 0.2s,border-color 0.2s,transform 0.2s}
+ .foot-social:hover{color:var(--primary);border-color:var(--primary);transform:translateY(-2px)}
  .foot-disclaimer{margin-top:24px;padding-top:24px;border-top:1px dashed var(--border);font-size:12px;color:var(--text-faint);line-height:1.6;max-width:880px;text-transform:none;letter-spacing:0;font-family:var(--font-sans)}
 
  /* ═══════════════ ANIMATIONS ═══════════════ */
@@ -1812,6 +1765,7 @@
  <div class="foot-brand">
  <span class="v-logo-mark"><svg><use href="#vision-mark"/></svg></span><span class="v-logo-div"></span><span class="v-logo-text">VISION</span>
  <p>Tax-smart money for households who think long-term. One app for your net worth, your budget, and the tax bill before you sell.</p>
+ <a class="foot-social" href="https://www.instagram.com/visionfinance.app/" target="_blank" rel="noopener" aria-label="Follow Vision on Instagram"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
  </div>
 
  <div class="foot-col">
@@ -2057,138 +2011,6 @@
 </script>
 
 
-<!-- ═══════════════ AI CHAT WIDGET ═══════════════ -->
-<div class="vchat" id="vchat">
- <div class="vchat-panel" role="dialog" aria-label="Vision assistant">
-  <div class="vchat-head">
-   <button class="vc-head-back" id="vcBack" aria-label="Back to previous question"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button><span class="vc-avatar"><svg><use href="#vision-mark"/></svg></span>
-   <div>
-    <div class="vc-head-name">Vision Assistant</div>
-    <div class="vc-head-status">Online &middot; replies instantly</div>
-   </div>
-   <button class="vc-head-close" id="vcClose" aria-label="Close chat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  </div>
-  <div class="vchat-body" id="vcBody"></div>
-  <div class="vchat-foot">Powered by Vision</div>
- </div>
- <button class="vchat-launch" id="vcLaunch" aria-label="Open chat">
-  <svg class="vc-open-ico" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5z"/><path d="M8.5 11.5h7M8.5 14.5h4.5"/></svg>
-  <svg class="vc-close-ico" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
- </button>
-</div><script>
-(function(){
- var TREE = {
-  start:{m:"Hi! I'm the Vision assistant. What can I help you with?",o:[
-   {t:"What is Vision?",n:"what"},
-   {t:"How does the Sell Simulator work?",n:"sell"},
-   {t:"Is my data private?",n:"privacy"},
-   {t:"What does it cost?",n:"pricing"},
-   {t:"Speak with a Vision Representative",n:"lead"}
-  ]},
-  what:{m:"Vision is a tax-smart money app — one clear picture of your net worth, budget, and investments, and it shows the tax impact of a sale before you make it.",o:[
-   {t:"Who is it for?",n:"who"},
-   {t:"What can it connect to?",n:"connect"},
-   {t:"Speak with a representative",n:"lead"},
-   {t:"Back to start",n:"start"}
-  ]},
-  sell:{m:"The Sell Simulator previews your capital-gains tax before you trade — short-term vs long-term, your real cost basis and holding period, and what you'd keep after tax.",o:[
-   {t:"Is this tax advice?",n:"advice"},
-   {t:"What does it cost?",n:"pricing"},
-   {t:"Speak with a representative",n:"lead"}
-  ]},
-  privacy:{m:"Privacy is built in. Your bank login goes straight to your institution through Plaid — we never see or store it. Tokens are AES-256 encrypted and analytics are opt-in.",o:[
-   {t:"Which banks are supported?",n:"connect"},
-   {t:"Speak with a representative",n:"lead"},
-   {t:"Back to start",n:"start"}
-  ]},
-  pricing:{m:"Vision is free to start. Premium is $6.99/mo or $49.99/yr and unlocks the full Sell Simulator tax tools, unlimited accounts, and household sharing. 14-day free trial, no card needed.",o:[
-   {t:"What's in Premium?",n:"premium"},
-   {t:"Speak with a representative",n:"lead"},
-   {t:"Back to start",n:"start"}
-  ]},
-  who:{m:"Households and couples who think long-term — anyone juggling multiple accounts who wants a shared, tax-aware picture without a spreadsheet.",o:[
-   {t:"What does it cost?",n:"pricing"},
-   {t:"Speak with a representative",n:"lead"},
-   {t:"Back to start",n:"start"}
-  ]},
-  connect:{m:"Through Plaid, Vision connects virtually every US bank, card, and brokerage — Chase, Bank of America, Wells Fargo, Coinbase, and more.",o:[
-   {t:"Is my data private?",n:"privacy"},
-   {t:"Speak with a representative",n:"lead"},
-   {t:"Back to start",n:"start"}
-  ]},
-  advice:{m:"Not yet — Vision is an education and tracking tool. It doesn't place trades or hold your money. A registered investing layer, Vision Invest, is on the roadmap.",o:[
-   {t:"What does it cost?",n:"pricing"},
-   {t:"Speak with a representative",n:"lead"},
-   {t:"Back to start",n:"start"}
-  ]},
-  premium:{m:"Premium adds the Sell Simulator's full tax preview, tax-lot CSV import, unlimited connected accounts, household sharing, and a monthly net-worth recap.",o:[
-   {t:"Speak with a representative",n:"lead"},
-   {t:"Back to start",n:"start"}
-  ]}
- };
- var root=document.getElementById('vchat'), launch=document.getElementById('vcLaunch'), closeBtn=document.getElementById('vcClose'), backBtn=document.getElementById('vcBack'), body=document.getElementById('vcBody'), started=false;
- var current='start', hist=[], activeEl=null;
- function scroll(){ body.scrollTop=body.scrollHeight; }
- function avatar(){ var s=document.createElement('span'); s.className='vc-mini'; s.innerHTML='<svg><use href="#vision-mark"/></svg>'; return s; }
- function clearActive(){ if(activeEl && activeEl.parentNode){ activeEl.parentNode.removeChild(activeEl); } activeEl=null; }
- function updateBack(){ if(current==='start'){ backBtn.classList.remove('show'); } else { backBtn.classList.add('show'); } }
- function botMsg(text,cb){
-  var tr=document.createElement('div'); tr.className='vc-row bot';
-  var t=document.createElement('div'); t.className='vc-typing'; t.innerHTML='<span></span><span></span><span></span>';
-  tr.appendChild(avatar()); tr.appendChild(t); body.appendChild(tr); scroll();
-  setTimeout(function(){
-   body.removeChild(tr);
-   var row=document.createElement('div'); row.className='vc-row bot';
-   var b=document.createElement('div'); b.className='vc-bubble'; b.textContent=text;
-   row.appendChild(avatar()); row.appendChild(b); body.appendChild(row); scroll();
-   if(cb) cb();
-  },520);
- }
- function userMsg(text){
-  var row=document.createElement('div'); row.className='vc-row user';
-  var b=document.createElement('div'); b.className='vc-bubble'; b.textContent=text;
-  row.appendChild(b); body.appendChild(row); scroll();
- }
- function showOptions(opts){
-  var wrap=document.createElement('div'); wrap.className='vc-options'; activeEl=wrap;
-  opts.forEach(function(o){
-   var btn=document.createElement('button'); btn.className='vc-chip'+(o.n==='lead'?' rep':''); btn.textContent=o.t;
-   btn.addEventListener('click',function(){ clearActive(); userMsg(o.t); goForward(o.n); });
-   wrap.appendChild(btn);
-  });
-  body.appendChild(wrap); scroll();
- }
- function renderNode(id){ current=id; updateBack(); var nd=TREE[id]; botMsg(nd.m,function(){ showOptions(nd.o); }); }
- function goForward(id){ hist.push(current); if(id==='lead'){ current='lead'; updateBack(); leadFlow(); } else { renderNode(id); } }
- function back(){
-  clearActive();
-  var prev='start';
-  while(hist.length){ var p=hist.pop(); if(TREE[p]){ prev=p; break; } }
-  renderNode(prev);
- }
- function leadFlow(){
-  botMsg("Great — leave your details and a Vision representative will reach out. You can tap the back arrow any time to return to the questions.",function(){
-   var form=document.createElement('div'); form.className='vc-form'; activeEl=form;
-   form.innerHTML='<input type="text" id="vcName" placeholder="Full name" autocomplete="name"><input type="email" id="vcEmail" placeholder="Email address" autocomplete="email"><input type="tel" id="vcPhone" placeholder="Phone number" autocomplete="tel"><div class="vc-err" id="vcErr">Please add your name, phone, and a valid email.</div><button type="button" id="vcSubmit">Request a call</button>';
-   body.appendChild(form); scroll();
-   document.getElementById('vcSubmit').addEventListener('click',function(){
-    var name=document.getElementById('vcName').value.trim(), email=document.getElementById('vcEmail').value.trim(), phone=document.getElementById('vcPhone').value.trim();
-    var ok=name && phone && /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email);
-    if(!ok){ document.getElementById('vcErr').style.display='block'; return; }
-    clearActive();
-    userMsg(name+' · '+email+' · '+phone);
-    var first=name.split(' ')[0];
-    current='done'; updateBack();
-    botMsg("Thanks, "+first+"! One of our Vision representatives will contact you within the next hour.",function(){ showOptions([{t:"Back to start",n:"start"}]); });
-   });
-  });
- }
- function begin(){ if(started) return; started=true; current='start'; updateBack(); botMsg(TREE.start.m,function(){ showOptions(TREE.start.o); }); }
- launch.addEventListener('click',function(){ root.classList.toggle('open'); if(root.classList.contains('open')) begin(); });
- closeBtn.addEventListener('click',function(){ root.classList.remove('open'); });
- backBtn.addEventListener('click',back);
-})();
-</script>
 <script>
 (function(){
  var g=function(id){return document.getElementById(id);};
