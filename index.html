@@ -536,7 +536,7 @@
  .roadmap-stats .rs-v.con{color:var(--text-secondary);font-size:22px}
  .roadmap-stats .rs-v.grw{color:var(--positive);font-size:22px}
  .roadmap-widget{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:26px}
- .rw-chart svg{width:100%;height:220px;display:block;overflow:visible}
+ .rw-chart svg{width:100%;height:auto;display:block;overflow:visible}
  .rw-chart .axis{font-family:var(--font-label);font-size:9px;fill:var(--text-faint)}
  .rw-legend{display:flex;gap:18px;margin-top:12px;font-family:var(--font-label);font-size:11px;color:var(--text-muted)}
  .rw-legend span{display:inline-flex;align-items:center;gap:7px}
@@ -1298,7 +1298,7 @@
   </div>
   <div class="roadmap-widget">
    <div class="rw-chart">
-    <svg id="irChart" viewBox="0 0 360 210" preserveAspectRatio="none">
+    <svg id="irChart" viewBox="0 0 360 150">
      <defs>
       <linearGradient id="irGTotal" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#5C7CFA" stop-opacity="0.5"/><stop offset="100%" stop-color="#5C7CFA" stop-opacity="0.02"/></linearGradient>
       <linearGradient id="irGCon" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8B93A9" stop-opacity="0.28"/><stop offset="100%" stop-color="#8B93A9" stop-opacity="0.02"/></linearGradient>
@@ -2022,7 +2022,7 @@
  var ov={cur:null,mon:null,yr:null,rate:null};
  var fmt=function(n){return '$'+Math.round(n).toLocaleString('en-US');};
  var fmtShort=function(n){ if(n>=1e9) return '$'+(n/1e9).toFixed(1)+'B'; if(n>=1e6) return '$'+(n/1e6).toFixed(n>=1e7?0:1)+'M'; if(n>=1e3) return '$'+Math.round(n/1e3)+'k'; return '$'+Math.round(n); };
- var W=360,H=210,padL=36,padR=10,padT=12,padB=22;
+ var W=360,H=150,padL=36,padR=10,padT=12,padB=22;
  function project(P,monthly,years,ratePct){ var r=ratePct/100/12,months=years*12,bal=P,con=P,pts=[{y:0,bal:bal,con:con}]; for(var m=1;m<=months;m++){ bal=bal*(1+r)+monthly; con+=monthly; if(m%12===0) pts.push({y:m/12,bal:bal,con:con}); } return pts; }
  function redraw(){
   var P=ov.cur!=null?ov.cur:Math.round((Math.pow(100000001,(+g('irCur').value)/1000)-1)/100)*100;
