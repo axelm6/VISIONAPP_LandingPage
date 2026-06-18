@@ -799,6 +799,18 @@
  .foot-top{grid-template-columns:1fr}
  .foot-bottom{flex-direction:column;align-items:flex-start;gap:12px}
  .hero-ctas .btn{width:100%;justify-content:center}
+ /* Nav: shrink logo so it doesn't crowd the Start-free button */
+ .nav-inner{padding:13px var(--gutter)}
+ .nav-brand .v-logo-mark{width:34px;height:34px}
+ .nav-brand .v-logo-text{font-size:19px}
+ .nav-brand .v-logo-div{height:20px;margin:0 11px}
+ .nav-cta .btn-primary{white-space:nowrap;padding:10px 15px}
+ /* Hero phone fan: tighten width + spread so all 3 fit without clipping */
+ .hero-visual{height:430px}
+ .phone{width:166px;border-radius:30px}
+ .phone-1{transform:translate(-54px,-6px) rotate(-7deg) scale(0.9)}
+ .phone-2{transform:translate(8px,22px) rotate(3deg)}
+ .phone-3{transform:translate(70px,-14px) rotate(7deg) scale(0.88)}
  }
 </style>
 </head>
